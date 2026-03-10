@@ -1,0 +1,15 @@
+-- CREATE DATABASE + CREATE TABLE statements for Mini E-Commerce App
+
+CREATE DATABASE IF NOT EXISTS shop_db;
+USE shop_db;
+
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    image_url VARCHAR(255),
+    category ENUM('Electronics', 'Clothing', 'Books', 'Home') NOT NULL,
+    stock INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
