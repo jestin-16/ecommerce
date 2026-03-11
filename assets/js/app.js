@@ -1,15 +1,35 @@
-// assets/js/app.js
-
 $(document).ready(function() {
-    // Initial fetch
-    loadProducts();
+    // Add JS indicator for CSS animations
+    $('body').addClass('js-enabled');
+
+    // Initialize Animations
+    initAnimations();
+
     // Load initial cart
     refreshCart();
+    
+    // Hero Quantity Selector
+    $('.hero-qty-plus').on('click', function() {
+        let val = parseInt($('.hero-qty-val').text());
+        $('.hero-qty-val').text(val + 1);
+    });
+    
+    $('.hero-qty-minus').on('click', function() {
+        let val = parseInt($('.hero-qty-val').text());
+        if (val > 1) $('.hero-qty-val').text(val - 1);
+    });
 
     // Delegate add to cart click since cards are injected dynamically
-    $('#product-grid').on('click', '.add-to-cart-btn', function() {
+    // Also handles the hero's static button
+    $(document).on('click', '.add-to-cart-btn', function() {
         const productId = $(this).data('id');
-        const quantity = 1;
+        let quantity = 1;
+        
+        // If it's the hero button, use the hero qty
+        if ($(this).closest('.floating-product-card').length) {
+            quantity = parseInt($('.hero-qty-val').text());
+        }
+
         addToCart(productId, quantity);
         
         // Simple animation feedback
@@ -25,6 +45,64 @@ $(document).ready(function() {
         }, 1500);
     });
 });
+
+/**
+ * Global Animation Observer
+ */
+let revealObserver;
+
+/**
+ * Initialize Reveal and Scroll Animations
+ */
+function initAnimations() {
+    // 1. Intersection Observer for Scroll Reveals
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    revealObserver = new IntersectionObserver(revealCallback, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all initial reveal elements
+    $('.scroll-reveal, .text-reveal-item').each(function() {
+        revealObserver.observe(this);
+    });
+
+    // 2. Scroll Progress Bar & Hero Parallax
+    $(window).on('scroll', function() {
+        // Toggle Navbar scroll state
+        if (window.scrollY > 50) {
+            $('.boreal-navbar').addClass('navbar-scrolled');
+        } else {
+            $('.boreal-navbar').removeClass('navbar-scrolled');
+        }
+
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        
+        // Update progress bar
+        $('#scroll-progress').css('width', scrolled + '%');
+
+        // Hero Parallax effect
+        const scrollValue = $(window).scrollTop();
+        $('.filter-moody').css('transform', `translateY(${scrollValue * 0.15}px) scale(${1 + scrollValue * 0.0001})`);
+        $('.hero-text-col').css('transform', `translateY(${scrollValue * 0.1}px)`);
+        
+        // Snowflake parallax
+        $('.snow-deco').each(function() {
+            const speed = $(this).data('speed') || 0.2;
+            $(this).css('transform', `translateY(${scrollValue * speed}px) rotate(${scrollValue * 0.05}deg)`);
+        });
+    });
+}
 
 /**
  * Fetch products from API and render
@@ -98,11 +176,11 @@ function renderProducts(products) {
              badgeHtml = `<span class="badge bg-white text-dark position-absolute top-0 start-0 m-3 rounded-0 tracking-wider">NEW</span>`;
         }
         
-        // Simple mock rating based on ID for visual flair
         const rating = (4.0 + (product.id % 10) / 10).toFixed(1);
+        const delayClass = `reveal-delay-${(index % 4) + 1}`;
 
         const cardHtml = `
-            <div class="col product-card-wrap">
+            <div class="col product-card-wrap scroll-reveal ${delayClass}">
                 <div class="card bg-transparent border-0 luxury-product-card h-100">
                     <div class="position-relative overflow-hidden product-image-wrapper mb-3">
                         ${badgeHtml}
@@ -135,6 +213,11 @@ function renderProducts(products) {
             </div>
         `;
         grid.append(cardHtml);
+    });
+
+    // Observe newly added products for reveal effect
+    grid.find('.scroll-reveal').each(function() {
+        if (revealObserver) revealObserver.observe(this);
     });
 }
 
