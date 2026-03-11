@@ -92,9 +92,9 @@ function renderCart(data) {
     if (!data.items || data.items.length === 0) {
         container.html(`
             <div class="empty-state">
-                <i class="bi bi-cart-x empty-state-icon"></i>
-                <h4 class="empty-state-title">Your cart is empty</h4>
-                <p class="empty-state-subtext">Looks like you haven't added anything yet.</p>
+                <i class="bi bi-snow empty-state-icon text-white"></i>
+                <h4 class="empty-state-title font-playfair text-white">Your collection is empty</h4>
+                <p class="empty-state-subtext text-secondary-light">Explore our curated pieces and elevate your wardrobe.</p>
             </div>
         `);
         return;
@@ -103,18 +103,18 @@ function renderCart(data) {
     data.items.forEach(item => {
         const itemHtml = `
             <div class="cart-item">
-                <img src="${item.image_url || 'https://placehold.co/60x60/E8EEF6/94A3B8?text=Image'}" class="cart-item-img" alt="${item.name}">
+                <img src="${item.image_url || 'https://placehold.co/60x60/0a1122/a9b5c7?text=Luxury'}" class="cart-item-img" alt="${item.name}">
                 <div class="cart-item-info">
                     <div class="cart-item-title">${item.name}</div>
                     <div class="qty-controls">
-                        <button class="qty-btn" type="button" data-action="decrease" data-id="${item.product_id}">-</button>
+                        <button class="qty-btn font-mono" type="button" data-action="decrease" data-id="${item.product_id}">-</button>
                         <input type="text" class="qty-input" value="${item.qty}" data-id="${item.product_id}" readonly>
-                        <button class="qty-btn" type="button" data-action="increase" data-id="${item.product_id}">+</button>
+                        <button class="qty-btn font-mono" type="button" data-action="increase" data-id="${item.product_id}">+</button>
                     </div>
                 </div>
                 <div class="cart-item-price-remove">
-                    <div class="cart-item-total">$${parseFloat(item.line_total).toFixed(2)}</div>
-                    <button class="remove-item-btn" data-id="${item.product_id}">×</button>
+                    <button class="remove-item-btn" data-id="${item.product_id}"><i class="bi bi-x"></i></button>
+                    <div class="cart-item-total mt-4">$${parseFloat(item.line_total).toFixed(2)}</div>
                 </div>
             </div>
         `;
