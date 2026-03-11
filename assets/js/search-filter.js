@@ -1,8 +1,25 @@
 // assets/js/search-filter.js
 
+/**
+ * Debounce function to delay execution
+ * @param {Function} func - Function to debounce
+ * @param {Number} delay - Delay in milliseconds
+ * @returns {Function} Debounced function
+ */
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
 $(document).ready(function () {
     const $searchInput = $('#search-input');
     const $categoryBtns = $('.category-btn');
+    const $navbarLinks = $('.navbar-category-link');
 
     // Debounced Search Handler
     $searchInput.on('input', debounce(function () {
@@ -21,7 +38,7 @@ $(document).ready(function () {
         }
     }, 400));
 
-    // Category Filter Handler
+    // Category Filter Handler (Filter buttons)
     $categoryBtns.on('click', function () {
         const category = $(this).data('category');
 
@@ -37,6 +54,37 @@ $(document).ready(function () {
 
         // Load products based on category
         loadProducts(category);
+    });
+
+    // Navbar category link handler
+    $navbarLinks.on('click', function (e) {
+        e.preventDefault();
+        const category = $(this).data('category');
+        
+        // Update filter buttons state
+        $categoryBtns.removeClass('active');
+        $(`[data-category="${category}"]`).addClass('active');
+        
+        // Clear search
+        $searchInput.val('');
+        
+        // Update title
+        $('#current-category-title').text(category === 'All' ? 'All Products' : category);
+        
+        // Load products
+        loadProducts(category);
+        
+        // Close mobile nav if open
+        const navCollapse = document.querySelector('#borealNav');
+        if (navCollapse && navCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navCollapse);
+            bsCollapse.hide();
+        }
+        
+        // Scroll to products section
+        setTimeout(() => {
+            document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     });
 });
 

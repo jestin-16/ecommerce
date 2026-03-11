@@ -4,7 +4,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 define('DB_NAME', 'shop_db');
 
 try {
@@ -16,6 +16,7 @@ try {
     ];
     
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+    error_log("db connected");
 } catch (PDOException $e) {
     header('Content-Type: application/json');
     echo json_encode([

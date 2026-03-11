@@ -13,6 +13,16 @@ try {
     }
 
     $products = $stmt->fetchAll();
+    
+    // Ensure image_url has a valid path
+    foreach ($products as &$product) {
+        if (empty($product['image_url'])) {
+            $product['image_url'] = 'images/image.png';
+        } else {
+            // Ensure the path doesn't have double 'images/' prefix
+            $product['image_url'] = str_replace('images/images/', 'images/', $product['image_url']);
+        }
+    }
 
     jsonResponse(true, $products, 'Products retrieved successfully.');
 } catch (PDOException $e) {
