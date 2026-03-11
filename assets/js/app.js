@@ -13,12 +13,15 @@ $(document).ready(function() {
         addToCart(productId, quantity);
         
         // Simple animation feedback
-        $(this).html('<i class="bi bi-check2"></i> Added');
-        $(this).removeClass('btn-primary').addClass('btn-success');
+        const originalText = $(this).html();
+        $(this).html('Added');
+        
+        // Add pulse animation to badge
+        $('#cart-badge').addClass('pulse');
+        setTimeout(() => $('#cart-badge').removeClass('pulse'), 350);
         
         setTimeout(() => {
-            $(this).html('<i class="bi bi-cart-plus"></i> Add to Cart');
-            $(this).removeClass('btn-success').addClass('btn-primary');
+            $(this).html(originalText);
         }, 1500);
     });
 });
@@ -65,41 +68,43 @@ function renderProducts(products) {
     grid.empty();
 
     if (products.length === 0) {
-        grid.html('<div class="col-12 text-center py-5 text-muted"><i class="bi bi-inbox fs-1"></i><p class="mt-2">No products found.</p></div>');
+        grid.html(`
+            <div class="col-12 empty-state">
+                <div class="empty-state-icon">❄</div>
+                <h2 class="empty-state-title">No products found</h2>
+                <p class="empty-state-subtext">Try a different search term or category</p>
+                <button class="btn-link-primary" onclick="$('.category-btn[data-category=\\'All\\']').click()">Reset Filters</button>
+            </div>
+        `);
         return;
     }
 
     products.forEach((product, index) => {
-        // Staggered animation delay
-        const delay = (index * 0.1) % 1; // max 1s delay
-        
         const inStock = parseInt(product.stock) > 0;
-        const stockClass = inStock ? 'in-stock' : 'out-of-stock';
-        const stockText = inStock ? 'In Stock' : 'Out of Stock';
         const btnDisabled = inStock ? '' : 'disabled';
-        const btnClass = inStock ? 'btn-primary' : 'btn-secondary';
-
+        const btnText = inStock ? 'Add to Cart' : 'Out of Stock';
+        
         const categoryClass = 'cat-' + product.category.replace(/\s+/g, '-');
 
         const cardHtml = `
-            <div class="col fade-up" style="animation-delay: ${delay}s">
-                <div class="card product-card h-100">
+            <div class="col product-card-wrap">
+                <div class="product-card">
                     <div class="product-img-wrapper">
                         <span class="category-badge ${categoryClass}">${product.category}</span>
-                        <img src="${product.image_url}" class="card-img-top product-img" alt="${product.name}" loading="lazy">
+                        <img src="${product.image_url}" class="product-img" alt="${product.name}" loading="lazy">
                     </div>
-                    <div class="card-body product-body">
-                        <h5 class="card-title product-title">${product.name}</h5>
-                        <p class="card-text product-desc">${product.description}</p>
-                        <div class="product-footer">
+                    <div class="product-body">
+                        <h5 class="product-title">${product.name}</h5>
+                        <div class="product-desc">${product.description}</div>
+                        <div class="product-price-row">
                             <span class="product-price">$${parseFloat(product.price).toFixed(2)}</span>
-                            <span class="stock-status ${stockClass}"><i class="bi ${inStock ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i> ${stockText}</span>
+                            <span class="product-rating">⭐ 4.5</span>
                         </div>
-                        <div class="mt-auto">
-                            <button class="btn ${btnClass} add-to-cart-btn" data-id="${product.id}" ${btnDisabled}>
-                                <i class="bi bi-cart-plus"></i> Add to Cart
-                            </button>
-                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <button class="btn-cart add-to-cart-btn" data-id="${product.id}" ${btnDisabled}>
+                            ${btnText}
+                        </button>
                     </div>
                 </div>
             </div>
