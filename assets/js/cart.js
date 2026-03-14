@@ -3,7 +3,7 @@
 $(document).ready(function () {
     // Event listeners
     $('#cart-items-container').on('click', '.qty-btn', function () {
-        const productId = $(this).data('id');
+        const cartKey = $(this).data('key');
         let currentQty = parseInt($(this).siblings('.qty-input').val());
         const action = $(this).data('action');
 
@@ -15,26 +15,26 @@ $(document).ready(function () {
 
         if (currentQty > 0) {
             $(this).siblings('.qty-input').val(currentQty);
-            updateCartItem(productId, currentQty);
+            updateCartItem(cartKey, currentQty);
         } else {
-            removeCartItem(productId);
+            removeCartItem(cartKey);
         }
     });
 
     $('#cart-items-container').on('change', '.qty-input', function () {
-        const productId = $(this).data('id');
+        const cartKey = $(this).data('key');
         let newQty = parseInt($(this).val());
 
         if (newQty > 0) {
-            updateCartItem(productId, newQty);
+            updateCartItem(cartKey, newQty);
         } else {
-            removeCartItem(productId);
+            removeCartItem(cartKey);
         }
     });
 
     $('#cart-items-container').on('click', '.remove-item-btn', function () {
-        const productId = $(this).data('id');
-        removeCartItem(productId);
+        const cartKey = $(this).data('key');
+        removeCartItem(cartKey);
     });
 
     $('#clear-cart-btn').on('click', function () {
@@ -101,20 +101,22 @@ function renderCart(data) {
     }
 
     data.items.forEach(item => {
+        const variantText = item.size || item.color ? `<div class="cart-item-variant text-secondary fs-8">${item.size ? 'Size: ' + item.size : ''}${item.size && item.color ? ' | ' : ''}${item.color ? 'Color: ' + item.color : ''}</div>` : '';
         const itemHtml = `
             <div class="cart-item">
-                <img src="${item.image_url || 'https://placehold.co/60x60/0a1122/a9b5c7?text=Luxury'}" class="cart-item-img" alt="${item.name}">
+                <img src="${item.image_url || 'https://placehold.co/60x60/f8f8f8/1a1616?text=Luxury'}" class="cart-item-img" alt="${item.name}">
                 <div class="cart-item-info">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn font-mono" type="button" data-action="decrease" data-id="${item.product_id}">-</button>
-                        <input type="text" class="qty-input" value="${item.qty}" data-id="${item.product_id}" readonly>
-                        <button class="qty-btn font-mono" type="button" data-action="increase" data-id="${item.product_id}">+</button>
+                    <div class="cart-item-title text-dark fw-bold">${item.name}</div>
+                    ${variantText}
+                    <div class="qty-controls mt-2">
+                        <button class="qty-btn font-mono" type="button" data-action="decrease" data-key="${item.cart_key}">-</button>
+                        <input type="text" class="qty-input" value="${item.qty}" data-key="${item.cart_key}" readonly>
+                        <button class="qty-btn font-mono" type="button" data-action="increase" data-key="${item.cart_key}">+</button>
                     </div>
                 </div>
                 <div class="cart-item-price-remove">
-                    <button class="remove-item-btn" data-id="${item.product_id}"><i class="bi bi-x"></i></button>
-                    <div class="cart-item-total mt-4">$${parseFloat(item.line_total).toFixed(2)}</div>
+                    <button class="remove-item-btn" data-key="${item.cart_key}"><i class="bi bi-x"></i></button>
+                    <div class="cart-item-total mt-4 text-dark font-mono">$${parseFloat(item.line_total).toFixed(2)}</div>
                 </div>
             </div>
         `;
@@ -127,12 +129,12 @@ function renderCart(data) {
  * @param {number} productId 
  * @param {number} quantity 
  */
-function updateCartItem(productId, quantity) {
+function updateCartItem(cartKey, quantity) {
     $.ajax({
         url: 'api/cart_update.php',
         method: 'POST',
         data: {
-            product_id: productId,
+            cart_key: cartKey,
             quantity: quantity
         },
         dataType: 'json',
@@ -154,12 +156,12 @@ function updateCartItem(productId, quantity) {
  * Remove item from cart
  * @param {number} productId 
  */
-function removeCartItem(productId) {
+function removeCartItem(cartKey) {
     $.ajax({
         url: 'api/cart_remove.php',
         method: 'POST',
         data: {
-            product_id: productId
+            cart_key: cartKey
         },
         dataType: 'json',
         success: function (response) {

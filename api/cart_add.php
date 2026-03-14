@@ -27,13 +27,24 @@ try {
         $_SESSION['cart'] = [];
     }
 
-    if (isset($_SESSION['cart'][$productId])) {
-        $_SESSION['cart'][$productId]['qty'] += $quantity;
+    $color = isset($_POST['color']) ? $_POST['color'] : '';
+    $size = isset($_POST['size']) ? $_POST['size'] : '';
+    $variantId = isset($_POST['variant_id']) ? (int)$_POST['variant_id'] : null;
+
+    // Create a unique key for the cart item based on product and variant/size/color
+    $cartKey = $productId . '_' . $variantId . '_' . $size . '_' . $color;
+
+    if (isset($_SESSION['cart'][$cartKey])) {
+        $_SESSION['cart'][$cartKey]['qty'] += $quantity;
     } else {
-        $_SESSION['cart'][$productId] = [
+        $_SESSION['cart'][$cartKey] = [
+            'product_id' => $productId,
+            'variant_id' => $variantId,
             'name' => $product['name'],
             'price' => $product['price'],
-            'qty' => $quantity
+            'qty' => $quantity,
+            'color' => $color,
+            'size' => $size
         ];
     }
 

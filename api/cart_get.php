@@ -15,11 +15,15 @@ foreach ($cart as $productId => $item) {
     $subtotal += $lineTotal;
 
     $cartData[] = [
-        'product_id' => $productId,
+        'product_id' => $item['product_id'],
+        'variant_id' => $item['variant_id'],
         'name' => $item['name'],
         'price' => $item['price'],
         'qty' => $item['qty'],
-        'line_total' => $lineTotal
+        'color' => $item['color'],
+        'size' => $item['size'],
+        'line_total' => $lineTotal,
+        'cart_key' => $productId // In this context $productId is actually the $cartKey from foreach
     ];
 }
 

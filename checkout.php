@@ -40,16 +40,16 @@ if (empty($cart) || $subtotal <= 0) {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body class="luxury-dark-theme bg-boreal-darker d-flex flex-column min-vh-100">
+<body class="luxury-light-theme d-flex flex-column min-vh-100">
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 boreal-navbar bg-boreal-dark border-bottom border-dark-subtle">
+    <nav class="navbar navbar-expand-lg sticky-top p-3 boreal-navbar bg-white border-bottom">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-white boreal-brand" href="index.php">
-                <i class="bi bi-asterisk me-2"></i>BOREAL
+            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-dark boreal-brand" href="index.php">
+                BOREAL
             </a>
-            <div class="d-flex align-items-center gap-4 text-white d-none d-lg-flex boreal-nav-icons ms-auto">
-                 <a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a>
+            <div class="d-flex align-items-center gap-4 text-dark d-none d-lg-flex boreal-nav-icons ms-auto">
+                 <a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a>
             </div>
         </div>
     </nav>
@@ -57,68 +57,68 @@ if (empty($cart) || $subtotal <= 0) {
     <!-- Checkout Main Section -->
     <section class="flex-grow-1 py-6">
         <div class="container px-lg-5 mt-5">
-            <h1 class="text-white font-playfair mb-5 text-center">Secure Checkout</h1>
+            <h1 class="text-dark font-playfair mb-5 text-center">Secure Checkout</h1>
             
             <div class="row g-5">
                 <div class="col-lg-7">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 p-md-5">
-                        <h4 class="text-white font-playfair mb-4">Shipping Information</h4>
+                    <div class="card bg-white border rounded-0 p-4 p-md-5">
+                        <h4 class="text-dark font-playfair mb-4">Shipping Information</h4>
                         <div id="checkout-alert" class="alert d-none rounded-0 border-0 fs-7"></div>
                         <form id="checkout-form">
                             <div class="mb-4">
-                                <label for="address" class="form-label text-white text-uppercase tracking-wider fs-8">Complete Shipping Address</label>
-                                <textarea class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" id="address" name="address" rows="3" required placeholder="Street, City, Postal Code, Country"></textarea>
+                                <label for="address" class="form-label text-dark text-uppercase tracking-wider fs-8">Complete Shipping Address</label>
+                                <textarea class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" id="address" name="address" rows="3" required placeholder="Street, City, Postal Code, Country"></textarea>
                             </div>
                             <!-- Mock Payment info just for visual completeness -->
-                            <h4 class="text-white font-playfair mb-4 mt-5">Payment Method</h4>
+                            <h4 class="text-dark font-playfair mb-4 mt-5">Payment Method</h4>
                             <div class="mb-3">
-                                <label class="form-label text-white text-uppercase tracking-wider fs-8">Card Number</label>
-                                <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" placeholder="**** **** **** ****" required>
+                                <label class="form-label text-dark text-uppercase tracking-wider fs-8">Card Number</label>
+                                <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="**** **** **** ****" required>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-6">
-                                     <label class="form-label text-white text-uppercase tracking-wider fs-8">Expiry</label>
-                                     <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" placeholder="MM/YY" required>
+                                     <label class="form-label text-dark text-uppercase tracking-wider fs-8">Expiry</label>
+                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="MM/YY" required>
                                 </div>
                                 <div class="col-6">
-                                     <label class="form-label text-white text-uppercase tracking-wider fs-8">CVC</label>
-                                     <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" placeholder="***" required>
+                                     <label class="form-label text-dark text-uppercase tracking-wider fs-8">CVC</label>
+                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="***" required>
                                 </div>
                             </div>
 
-                            <button type="submit" id="place-order-btn" class="btn btn-light rounded-0 w-100 py-3 text-uppercase fs-7 fw-bold tracking-wider mt-4">Place Order ($<?php echo number_format($subtotal, 2); ?>)</button>
+                            <button type="submit" id="place-order-btn" class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fs-7 fw-bold tracking-wider mt-4">Place Order ($<?php echo number_format($subtotal, 2); ?>)</button>
                         </form>
                     </div>
                 </div>
                 
                 <div class="col-lg-5">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 p-md-5 sticky-top" style="top: 100px;">
-                        <h4 class="text-white font-playfair mb-4">Order Summary</h4>
+                    <div class="card bg-white border rounded-0 p-4 p-md-5 sticky-top" style="top: 100px;">
+                        <h4 class="text-dark font-playfair mb-4">Order Summary</h4>
                         
                         <div class="order-items-scroll" style="max-height: 350px; overflow-y: auto;">
-                            <?php foreach($cart as $productId => $item): if ($item['qty'] <= 0) continue; ?>
-                            <div class="d-flex align-items-center gap-3 mb-3 border-bottom border-dark-subtle pb-3">
+                            <?php foreach($cart as $cartKey => $item): if ($item['qty'] <= 0) continue; ?>
+                            <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-3">
                                 <div>
-                                    <h6 class="text-white font-playfair mb-0"><?php echo htmlspecialchars($item['name']); ?></h6>
-                                    <small class="text-secondary-light tracking-wider fs-8">QTY: <?php echo $item['qty']; ?></small>
+                                    <h6 class="text-dark font-playfair mb-0"><?php echo htmlspecialchars($item['name']); ?></h6>
+                                    <small class="text-secondary tracking-wider fs-8">QTY: <?php echo $item['qty']; ?> <?php echo isset($item['size']) && $item['size'] ? " | SIZE: ".$item['size'] : ""; ?> <?php echo isset($item['color']) && $item['color'] ? " | COLOR: ".$item['color'] : ""; ?></small>
                                 </div>
-                                <div class="ms-auto text-white font-mono">
+                                <div class="ms-auto text-dark font-mono">
                                     $<?php echo number_format($item['price'] * $item['qty'], 2); ?>
                                 </div>
                             </div>
                             <?php endforeach; ?>
                         </div>
 
-                        <div class="mt-4 pt-3 border-top border-dark-subtle">
+                        <div class="mt-4 pt-3 border-top">
                             <div class="d-flex justify-content-between mb-2">
-                                <span class="text-secondary-light text-uppercase tracking-wider fs-8">Subtotal</span>
-                                <span class="text-white font-mono">$<?php echo number_format($subtotal, 2); ?></span>
+                                <span class="text-secondary text-uppercase tracking-wider fs-8">Subtotal</span>
+                                <span class="text-dark font-mono">$<?php echo number_format($subtotal, 2); ?></span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span class="text-secondary-light text-uppercase tracking-wider fs-8">Shipping (Standard)</span>
-                                <span class="text-white font-mono">FREE</span>
+                                <span class="text-secondary text-uppercase tracking-wider fs-8">Shipping (Standard)</span>
+                                <span class="text-dark font-mono">FREE</span>
                             </div>
-                            <div class="d-flex justify-content-between mt-3 pt-3 border-top border-dark-subtle">
+                            <div class="d-flex justify-content-between mt-3 pt-3 border-top">
                                 <span class="text-white text-uppercase fw-bold tracking-wider fs-6">Total</span>
                                 <span class="text-accent font-mono fw-bold fs-5">$<?php echo number_format($subtotal, 2); ?></span>
                             </div>
@@ -130,9 +130,9 @@ if (empty($cart) || $subtotal <= 0) {
     </section>
 
     <!-- Footer -->
-    <footer class="footer-boreal py-4 border-top border-dark-subtle mt-auto bg-boreal-deep">
+    <footer class="footer-boreal py-4 border-top mt-auto bg-light">
         <div class="container text-center">
-            <p class="text-secondary-light fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. Secure Checkout.</p>
+            <p class="text-secondary fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. Secure Checkout.</p>
         </div>
     </footer>
 
@@ -157,7 +157,7 @@ if (empty($cart) || $subtotal <= 0) {
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            $('#checkout-alert').removeClass('d-none alert-danger').addClass('alert-success bg-dark text-success').html('<i class="bi bi-check-circle me-2"></i>' + response.message + ' Redirecting...');
+                            $('#checkout-alert').removeClass('d-none alert-danger').addClass('alert-success border text-dark').html('<i class="bi bi-check-circle me-2 text-success"></i>' + response.message + ' Redirecting...');
                             btn.html('<i class="bi bi-check"></i> Success');
                             setTimeout(() => {
                                 window.location.href = 'index.php'; // Or an order success page

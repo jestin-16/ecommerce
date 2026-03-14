@@ -9,14 +9,14 @@ $(document).ready(function () {
         const term = $(this).val().trim();
 
         // If typing in search, reset category buttons visual state
-        $categoryBtns.removeClass('active-filter text-white').addClass('text-secondary hover-white');
+        $categoryBtns.removeClass('active-filter bg-dark text-white').addClass('text-dark opacity-50');
         $('#current-category-title').text(term ? `Search Results for "${term}"` : 'All Products');
 
         if (term.length > 0) {
             searchProducts(term);
         } else {
             // Re-highlight "All" when input is cleared
-            $('[data-category="All"]').removeClass('text-secondary hover-white').addClass('active-filter text-white');
+            $('[data-category="All"]').removeClass('opacity-50').addClass('active-filter bg-dark text-white');
             loadProducts('All');
         }
     }, 400));
@@ -26,8 +26,8 @@ $(document).ready(function () {
         const category = $(this).data('category');
 
         // Update active state
-        $categoryBtns.removeClass('active-filter text-white').addClass('text-secondary hover-white');
-        $(this).removeClass('text-secondary hover-white').addClass('active-filter text-white');
+        $categoryBtns.removeClass('active-filter bg-dark text-white').addClass('text-dark opacity-50');
+        $(this).removeClass('opacity-50').addClass('active-filter bg-dark text-white');
 
         // Clear search input
         $searchInput.val('');

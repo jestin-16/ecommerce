@@ -45,19 +45,27 @@ try {
     $order_id = $pdo->lastInsertId();
 
     // 2. Insert Order Items and update stock
-    foreach ($cart as $productId => $item) {
+    foreach ($cart as $cartKey => $item) {
+        $productId = $item['product_id'];
+        $variantId = $item['variant_id'] ?? null;
         $qty = $item['qty'];
         $price = $item['price'];
 
         if ($qty <= 0) continue;
 
         // Verify stock
-        $stmt_stock = $pdo->prepare("SELECT stock FROM products WHERE id = ? FOR UPDATE");
-        $stmt_stock->execute([$productId]);
-        $productRow = $stmt_stock->fetch();
+        if ($variantId) {
+            $stmt_stock = $pdo->prepare("SELECT stock FROM product_variants WHERE id = ? FOR UPDATE");
+            $stmt_stock->execute([$variantId]);
+        } else {
+            $stmt_stock = $pdo->prepare("SELECT stock FROM products WHERE id = ? FOR UPDATE");
+            $stmt_stock->execute([$productId]);
+        }
+        
+        $stockRow = $stmt_stock->fetch();
 
-        if (!$productRow || $productRow['stock'] < $qty) {
-            throw new Exception("Product {$item['name']} is out of stock or insufficient quantity.");
+        if (!$stockRow || $stockRow['stock'] < $qty) {
+            throw new Exception("Item {$item['name']} is out of stock or insufficient quantity.");
         }
 
         // Insert order item
@@ -65,8 +73,13 @@ try {
         $stmt_item->execute([$order_id, $productId, $qty, $price]);
 
         // Deduct stock
-        $stmt_update = $pdo->prepare("UPDATE products SET stock = stock - ? WHERE id = ?");
-        $stmt_update->execute([$qty, $productId]);
+        if ($variantId) {
+            $stmt_update = $pdo->prepare("UPDATE product_variants SET stock = stock - ? WHERE id = ?");
+            $stmt_update->execute([$qty, $variantId]);
+        } else {
+            $stmt_update = $pdo->prepare("UPDATE products SET stock = stock - ? WHERE id = ?");
+            $stmt_update->execute([$qty, $productId]);
+        }
     }
 
     $pdo->commit();

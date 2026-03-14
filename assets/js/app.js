@@ -21,28 +21,25 @@ $(document).ready(function() {
 
     // Delegate add to cart click since cards are injected dynamically
     // Also handles the hero's static button
-    $(document).on('click', '.add-to-cart-btn', function() {
-        const productId = $(this).data('id');
-        let quantity = 1;
+    // Delegate card click to open detail modal
+    $(document).on('click', '.luxury-product-card', function(e) {
+        // Only trigger if we're not clicking the wishlist btn specifically
+        if ($(e.target).closest('.wishlist-btn').length) return;
         
-        // If it's the hero button, use the hero qty
-        if ($(this).closest('.floating-product-card').length) {
-            quantity = parseInt($('.hero-qty-val').text());
+        const productId = $(this).find('.add-to-cart-btn').data('id');
+        if (typeof openProductDetail === 'function') {
+            openProductDetail(productId);
         }
+    });
 
-        addToCart(productId, quantity);
-        
-        // Simple animation feedback
-        const originalText = $(this).html();
-        $(this).html('Added');
-        
-        // Add pulse animation to badge
-        $('#cart-badge').addClass('pulse');
-        setTimeout(() => $('#cart-badge').removeClass('pulse'), 350);
-        
-        setTimeout(() => {
-            $(this).html(originalText);
-        }, 1500);
+    // Handle add-to-cart button on card specifically to also open detail
+    $(document).on('click', '.add-to-cart-btn', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent card double-trigger
+        const productId = $(this).data('id');
+        if (typeof openProductDetail === 'function') {
+            openProductDetail(productId);
+        }
     });
 });
 
@@ -148,10 +145,10 @@ function renderProducts(products) {
     if (products.length === 0) {
         grid.html(`
             <div class="col-12 empty-state">
-                <div class="empty-state-icon text-white"><i class="bi bi-snow"></i></div>
-                <h2 class="empty-state-title text-white font-playfair">No curated pieces found</h2>
-                <p class="empty-state-subtext text-secondary-light">Explore a different category or search term.</p>
-                <button class="btn btn-outline-light rounded-0 px-4 py-2 mt-3" onclick="$('.active-filter').removeClass('active-filter'); $(this).addClass('active-filter'); loadProducts('All');">Reset Collection</button>
+                <div class="empty-state-icon text-dark"><i class="bi bi-snow"></i></div>
+                <h2 class="empty-state-title text-dark font-playfair">No curated pieces found</h2>
+                <p class="empty-state-subtext text-secondary">Explore a different category or search term.</p>
+                <button class="btn btn-outline-dark rounded-0 px-4 py-2 mt-3" onclick="$('.active-filter').removeClass('active-filter'); $(this).addClass('active-filter'); loadProducts('All');">Reset Collection</button>
             </div>
         `);
         return;
@@ -177,24 +174,24 @@ function renderProducts(products) {
                 <div class="card bg-transparent border-0 luxury-product-card h-100">
                     <div class="position-relative overflow-hidden product-image-wrapper mb-3">
                         ${badgeHtml}
-                        <button class="btn btn-link text-white position-absolute top-0 end-0 m-2 wishlist-btn"><i class="bi bi-heart"></i></button>
-                        <img src="${product.image_url}" class="card-img-top rounded-0 object-fit-cover product-img-height mix-blend-mode-lighten" alt="${product.name}" loading="lazy">
+                        <button class="btn btn-link text-dark position-absolute top-0 end-0 m-2 wishlist-btn"><i class="bi bi-heart"></i></button>
+                        <img src="${product.image_url}" class="card-img-top rounded-0 object-fit-cover product-img-height mix-blend-mode-multiply" style="filter: sepia(0.2) contrast(1.1);" alt="${product.name}" loading="lazy">
                         <div class="product-overlay d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 bg-overlay opacity-0 transition-all">
-                            <button class="btn btn-outline-light rounded-0 px-4 py-2 text-uppercase fs-8 tracking-wider add-to-cart-btn" data-id="${product.id}" ${btnDisabled}>
-                                ${btnText}
+                            <button class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fs-8 tracking-wider add-to-cart-btn" data-id="${product.id}">
+                                VIEW DETAILS
                             </button>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-2 pb-0">
                         <div class="d-flex justify-content-between align-items-start mb-1">
                             <p class="text-accent text-uppercase fs-8 tracking-wider mb-0">BOREAL</p>
-                            <div class="rating text-white fs-8">
+                            <div class="rating text-dark fs-8">
                                 <i class="bi bi-star-fill text-accent-warm"></i> ${rating}
                             </div>
                         </div>
-                        <h5 class="card-title text-white font-playfair fs-5 mb-2">${product.name}</h5>
+                        <h5 class="card-title text-dark font-playfair fs-5 mb-2">${product.name}</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
-                            <p class="card-text text-white font-mono fs-5 mb-0">$${parseFloat(product.price).toFixed(2)}</p>
+                            <p class="card-text text-dark font-mono fs-5 mb-0">$${parseFloat(product.price).toFixed(2)}</p>
                             <div class="color-swatches d-flex gap-1">
                                 <span class="swatch bg-dark border border-secondary rounded-circle d-block" style="width:12px; height:12px;"></span>
                                 <span class="swatch bg-secondary rounded-circle d-block" style="width:12px; height:12px;"></span>
@@ -216,13 +213,16 @@ function renderProducts(products) {
 /**
  * Add product to cart via AJAX POST
  */
-function addToCart(productId, quantity) {
+function addToCart(productId, quantity, color = '', size = '', variantId = null) {
     $.ajax({
         url: 'api/cart_add.php',
         method: 'POST',
         data: {
             product_id: productId,
-            quantity: quantity
+            quantity: quantity,
+            color: color,
+            size: size,
+            variant_id: variantId
         },
         dataType: 'json',
         success: function(response) {

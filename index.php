@@ -441,12 +441,116 @@ $featuredProduct = !empty($products) ? $products[0] : null;
         </div>
     </div>
 
+    <!-- Product Detail Modal -->
+    <div class="modal fade product-detail-modal" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 rounded-0 overflow-hidden">
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-4 z-3 shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <!-- Left Panel: Images -->
+                        <div class="col-lg-7 bg-light overflow-hidden position-relative product-modal-images">
+                            <div class="main-image-container position-relative h-100 d-flex align-items-center justify-content-center py-5">
+                                <img id="modalProductImage" src="" alt="Product Image" class="img-fluid main-modal-img">
+                                <!-- Featured Badge handled via JS -->
+                                <span id="modalBadge" class="badge position-absolute top-0 start-0 m-4 rounded-0 tracking-wider d-none"></span>
+                            </div>
+                            <div class="thumbnail-strip d-flex gap-2 p-3 position-absolute bottom-0 w-100 justify-content-center bg-overlay-subtle">
+                                <!-- Thumbnails injected via JS -->
+                            </div>
+                        </div>
+                        
+                        <!-- Right Panel: Info -->
+                        <div class="col-lg-5 p-4 p-md-5 d-flex flex-column h-100" style="max-height: 90vh; overflow-y: auto;">
+                            <div class="brand-label text-accent text-uppercase fs-8 tracking-widest mb-2">BOREAL</div>
+                            <h2 id="modalProductName" class="font-playfair display-6 mb-3"></h2>
+                            
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="rating text-dark fs-7">
+                                    <i class="bi bi-star-fill text-accent-warm"></i>
+                                    <span id="modalRating">4.8</span>
+                                </div>
+                                <span class="text-secondary fs-8">|</span>
+                                <span class="text-secondary fs-8 tracking-wider text-uppercase">124 Reviews</span>
+                            </div>
+
+                            <div class="price-row mb-4">
+                                <h3 id="modalProductPrice" class="font-mono fs-3 mb-0"></h3>
+                                <p id="modalSalePrice" class="text-secondary text-decoration-line-through fs-6 mb-0 d-none"></p>
+                            </div>
+
+                            <div class="description-wrap mb-4">
+                                <p id="modalDescription" class="text-secondary fs-7 lh-lg"></p>
+                            </div>
+
+                            <!-- Color Selector -->
+                            <div id="modalColorSelector" class="mb-4">
+                                <label class="text-dark text-uppercase tracking-wider fs-8 mb-3 d-block fw-bold">Select Color: <span id="selectedColorName" class="text-secondary fw-normal"></span></label>
+                                <div id="colorSwatches" class="d-flex gap-2 flex-wrap">
+                                    <!-- Colors injected via JS -->
+                                </div>
+                            </div>
+
+                            <!-- Size Selector -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <label class="text-dark text-uppercase tracking-wider fs-8 d-block fw-bold mb-0">Select Size</label>
+                                    <button class="btn btn-link p-0 text-accent text-decoration-none fs-8 text-uppercase tracking-wider" id="sizeGuideBtn">Size Guide</button>
+                                </div>
+                                <div id="sizeSelector" class="d-flex gap-2 flex-wrap">
+                                    <button class="size-pill" data-size="XS">XS</button>
+                                    <button class="size-pill" data-size="S">S</button>
+                                    <button class="size-pill" data-size="M">M</button>
+                                    <button class="size-pill" data-size="L">L</button>
+                                    <button class="size-pill" data-size="XL">XL</button>
+                                    <button class="size-pill" data-size="XXL">XXL</button>
+                                </div>
+                                <div id="sizeError" class="text-danger fs-8 mt-2 d-none">Please select a size to continue.</div>
+                            </div>
+
+                            <!-- Qty and Add to Cart -->
+                            <div class="mt-auto">
+                                <div class="d-flex gap-3 align-items-center mb-4">
+                                    <div class="qty-stepper d-flex align-items-center border">
+                                        <button class="qty-minus border-0 bg-transparent px-3 py-2">-</button>
+                                        <input type="number" id="modalQty" value="1" min="1" max="10" class="border-0 bg-transparent text-center fw-bold" style="width: 50px;" readonly>
+                                        <button class="qty-plus border-0 bg-transparent px-3 py-2">+</button>
+                                    </div>
+                                    <button id="modalAddToCartBtn" class="btn btn-dark rounded-0 flex-grow-1 py-3 text-uppercase tracking-widest fw-bold fs-7">Add to Cart</button>
+                                </div>
+                                
+                                <button class="btn btn-outline-dark rounded-0 w-100 py-3 text-uppercase tracking-widest fw-bold fs-7 mb-4"><i class="bi bi-heart me-2"></i> Add to Wishlist</button>
+
+                                <!-- Trust Badges -->
+                                <div class="row g-0 pt-4 border-top">
+                                    <div class="col-4 text-center">
+                                        <i class="bi bi-truck fs-5 mb-1 d-block"></i>
+                                        <span class="fs-9 text-uppercase tracking-wider text-secondary">Free Shipping</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <i class="bi bi-arrow-return-left fs-5 mb-1 d-block"></i>
+                                        <span class="fs-9 text-uppercase tracking-wider text-secondary">30-Day Returns</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <i class="bi bi-shield-check fs-5 mb-1 d-block"></i>
+                                        <span class="fs-9 text-uppercase tracking-wider text-secondary">Authenticity</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/app.js?v=2"></script>
     <script src="assets/js/cart.js?v=2"></script>
     <script src="assets/js/search-filter.js?v=2"></script>
+    <script src="assets/js/product-detail.js?v=2"></script>
 </body>
 
 </html>

@@ -3,14 +3,14 @@
 require_once 'db.php';
 session_start();
 
-$productId = isset($_POST['product_id']) ? (int) $_POST['product_id'] : 0;
+$cartKey = isset($_POST['cart_key']) ? $_POST['cart_key'] : '';
 
-if ($productId <= 0) {
-    jsonResponse(false, [], 'Invalid product ID.');
+if (empty($cartKey)) {
+    jsonResponse(false, [], 'Invalid cart key.');
 }
 
-if (isset($_SESSION['cart'][$productId])) {
-    unset($_SESSION['cart'][$productId]);
+if (isset($_SESSION['cart'][$cartKey])) {
+    unset($_SESSION['cart'][$cartKey]);
 }
 
 // Return updated totals
