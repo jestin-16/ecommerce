@@ -333,7 +333,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                     <span class="fs-4 font-mono text-white fw-bold" id="cart-total">$0.00</span>
                 </div>
                 <div class="d-grid gap-3">
-                    <button class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark" id="checkout-btn">Proceed to Checkout</button>
+                    <a href="checkout.php" class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark w-100 text-center text-decoration-none" id="checkout-btn">Proceed to Checkout</a>
                     <button class="btn btn-link text-secondary text-uppercase fs-8 text-decoration-none hover-white" id="clear-cart-btn">Empty Collection</button>
                 </div>
             </div>

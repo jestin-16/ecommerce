@@ -109,6 +109,9 @@ $join_date = isset($user['created_at']) ? date('F j, Y', strtotime($user['create
                         </div>
 
                         <div class="d-grid gap-3">
+                            <?php if ($user['role'] === 'admin'): ?>
+                                <a href="admin_dashboard.php" class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark">Admin Dashboard</a>
+                            <?php endif; ?>
                             <a href="index.php" class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark">Continue Shopping</a>
                             <a href="logout.php" class="btn btn-danger rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider opacity-75 hover-opacity-100">Log Out</a>
                         </div>
