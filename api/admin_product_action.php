@@ -56,16 +56,26 @@ try {
 
             // Save variants
             if (!empty($variants)) {
-                $variantStmt = $pdo->prepare("INSERT INTO product_variants (product_id, color_name, color_hex, image_url, stock) VALUES (?, ?, ?, ?, ?)");
+                $variantStmt = $pdo->prepare("INSERT INTO product_variants (product_id, color_name, color_hex, image_url) VALUES (?, ?, ?, ?)");
+                $stockStmt = $pdo->prepare("INSERT INTO variant_stocks (variant_id, size, stock) VALUES (?, ?, ?)");
+                
                 foreach ($variants as $v) {
                     if (empty($v['color_name']) || empty($v['color_hex'])) continue;
+                    
                     $variantStmt->execute([
                         $id, 
                         $v['color_name'], 
                         $v['color_hex'], 
-                        $v['image_url'] ?? $image_url,
-                        $v['stock'] ?? 0
+                        $v['image_url'] ?? $image_url
                     ]);
+                    $variantId = $pdo->lastInsertId();
+
+                    // Save size stocks
+                    if (!empty($v['sizes'])) {
+                        foreach ($v['sizes'] as $size => $stockCount) {
+                            $stockStmt->execute([$variantId, $size, (int)$stockCount]);
+                        }
+                    }
                 }
             }
 

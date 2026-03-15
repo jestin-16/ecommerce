@@ -92,8 +92,15 @@ $products = $stmt->fetchAll();
                             </td>
                             <td class="font-mono text-dark fs-7 fw-bold">$<?php echo number_format($p['price'], 2); ?></td>
                             <td>
-                                <div class="font-mono text-dark fs-7 <?php echo $p['stock'] <= 5 ? 'text-danger fw-bold' : ''; ?>">
-                                    Qty: <?php echo $p['stock']; ?>
+                                <div class="font-mono text-dark fs-7">
+                                    <?php 
+                                    // Calculate total stock from variants if they exist
+                                    $stmt = $pdo->prepare("SELECT SUM(stock) as v_stock FROM variant_stocks WHERE variant_id IN (SELECT id FROM product_variants WHERE product_id = ?)");
+                                    $stmt->execute([$p['id']]);
+                                    $vStock = $stmt->fetch()['v_stock'];
+                                    $displayStock = ($vCount > 0) ? ($vStock ?? 0) : $p['stock'];
+                                    echo "Qty: " . $displayStock; 
+                                    ?>
                                 </div>
                                 <?php if($vCount > 0): ?>
                                     <span class="badge bg-accent-warm text-white rounded-pill fs-9 mt-1"><?php echo $vCount; ?> Variants</span>

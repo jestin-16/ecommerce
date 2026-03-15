@@ -9,8 +9,16 @@ try {
         color_name VARCHAR(50),
         color_hex VARCHAR(10),
         image_url VARCHAR(255),
-        stock INT DEFAULT 0,
         FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    )");
+
+    // Create variant_stocks table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS variant_stocks (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        variant_id INT NOT NULL,
+        size VARCHAR(10),
+        stock INT DEFAULT 0,
+        FOREIGN KEY (variant_id) REFERENCES product_variants(id) ON DELETE CASCADE
     )");
     
     // Check if description column exists before adding

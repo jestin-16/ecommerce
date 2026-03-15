@@ -27,6 +27,12 @@ if ($is_edit) {
         $stmt = $pdo->prepare("SELECT * FROM product_variants WHERE product_id = ?");
         $stmt->execute([$id]);
         $variants = $stmt->fetchAll();
+
+        foreach ($variants as &$v) {
+            $stmt = $pdo->prepare("SELECT size, stock FROM variant_stocks WHERE variant_id = ?");
+            $stmt->execute([$v['id']]);
+            $v['sizes'] = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        }
     } else {
         $is_edit = false; // Not found, fallback to add
     }
@@ -141,13 +147,23 @@ $variants = $variants ?? [];
                                                 <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Hex Code</label>
                                                 <input type="text" name="variants[<?php echo $index; ?>][color_hex]" class="form-control form-control-sm border-light rounded-0" placeholder="#000000" value="<?php echo htmlspecialchars($v['color_hex']); ?>" required>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-3">
                                                 <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Variant Image URL</label>
                                                 <input type="text" name="variants[<?php echo $index; ?>][image_url]" class="form-control form-control-sm border-light rounded-0" placeholder="images/colors/blue.png" value="<?php echo htmlspecialchars($v['image_url']); ?>" required>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">V. Stock</label>
-                                                <input type="number" name="variants[<?php echo $index; ?>][stock]" class="form-control form-control-sm border-light rounded-0" value="<?php echo $v['stock']; ?>" required>
+                                            <div class="col-md-4">
+                                                <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Stock per Size (XS, S, M, L, XL, XXL)</label>
+                                                <div class="d-flex gap-1">
+                                                    <?php 
+                                                    $sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+                                                    foreach($sizes as $sz): 
+                                                        $szVal = $v['sizes'][$sz] ?? 0;
+                                                    ?>
+                                                        <div class="flex-grow-1">
+                                                            <input type="number" name="variants[<?php echo $index; ?>][sizes][<?php echo $sz; ?>]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="<?php echo $sz; ?>" value="<?php echo $szVal; ?>" title="<?php echo $sz; ?>">
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -221,13 +237,20 @@ $variants = $variants ?? [];
                                 <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Hex Code</label>
                                 <input type="text" name="variants[${variantIndex}][color_hex]" class="form-control form-control-sm border-light rounded-0" placeholder="#000000" required>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Variant Image URL</label>
                                 <input type="text" name="variants[${variantIndex}][image_url]" class="form-control form-control-sm border-light rounded-0" placeholder="images/colors/blue.png" required>
                             </div>
-                            <div class="col-md-2">
-                                <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">V. Stock</label>
-                                <input type="number" name="variants[${variantIndex}][stock]" class="form-control form-control-sm border-light rounded-0" value="0" required>
+                            <div class="col-md-4">
+                                <label class="fs-9 text-uppercase tracking-wider text-secondary d-block mb-1">Stock per Size (XS, S, M, L, XL, XXL)</label>
+                                <div class="d-flex gap-1">
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][XS]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="XS" value="0"></div>
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][S]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="S" value="0"></div>
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][M]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="M" value="0"></div>
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][L]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="L" value="0"></div>
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][XL]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="XL" value="0"></div>
+                                    <div class="flex-grow-1"><input type="number" name="variants[${variantIndex}][sizes][XXL]" class="form-control form-control-sm border-light rounded-0 px-1 font-mono fs-9 text-center" placeholder="XXL" value="0"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

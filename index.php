@@ -519,7 +519,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                                     <button id="modalAddToCartBtn" class="btn btn-dark rounded-0 flex-grow-1 py-3 text-uppercase tracking-widest fw-bold fs-7">Add to Cart</button>
                                 </div>
                                 
-                                <button class="btn btn-outline-dark rounded-0 w-100 py-3 text-uppercase tracking-widest fw-bold fs-7 mb-4"><i class="bi bi-heart me-2"></i> Add to Wishlist</button>
+                                <button class="btn btn-outline-dark rounded-0 w-100 py-3 text-uppercase tracking-widest fw-bold fs-7 mb-4 modal-wishlist-btn"><i class="bi bi-heart me-2"></i> Add to Wishlist</button>
 
                                 <!-- Trust Badges -->
                                 <div class="row g-0 pt-4 border-top">
@@ -551,6 +551,11 @@ $featuredProduct = !empty($products) ? $products[0] : null;
     <script src="assets/js/cart.js?v=2"></script>
     <script src="assets/js/search-filter.js?v=2"></script>
     <script src="assets/js/product-detail.js?v=2"></script>
+    
+    <!-- Wishlist Toast -->
+    <div id="wishlist-toast" class="wishlist-toast">
+        <i class="bi bi-heart-fill me-2"></i> Item added to wishlist
+    </div>
 </body>
 
 </html>

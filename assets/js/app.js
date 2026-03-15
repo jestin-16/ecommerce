@@ -72,6 +72,22 @@ function initAnimations() {
         revealObserver.observe(this);
     });
 
+    // Wishlist Toast Handler
+    $(document).on('click', '.wishlist-btn, .modal-wishlist-btn', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        showWishlistToast();
+        
+        // Toggle heart icon state for visual feedback
+        const icon = $(this).find('i');
+        if (icon.hasClass('bi-heart')) {
+            icon.removeClass('bi-heart').addClass('bi-heart-fill text-danger');
+        } else {
+            // It's a demo, so we can toggle back if clicked again
+            icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart');
+        }
+    });
+
     // 2. Scroll Progress Bar & Hero Parallax
     $(window).on('scroll', function() {
         // Toggle Navbar scroll state
@@ -236,4 +252,21 @@ function addToCart(productId, quantity, color = '', size = '', variantId = null)
             console.error('AJAX cart add error:', err);
         }
     });
+}
+
+/**
+ * Show Wishlist Toast Notification
+ */
+function showWishlistToast() {
+    const toast = $('#wishlist-toast');
+    toast.addClass('show');
+    
+    // Clear previous timeout if any
+    if (window.wishlistToastTimeout) {
+        clearTimeout(window.wishlistToastTimeout);
+    }
+    
+    window.wishlistToastTimeout = setTimeout(() => {
+        toast.removeClass('show');
+    }, 3000);
 }

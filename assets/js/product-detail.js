@@ -103,8 +103,8 @@ $(document).ready(function() {
             addThumbnail(currentProduct.image_url);
         }
 
-        // Update Stock/Size visibility based on total product stock if no variant selected
-        updateSizeAvailability(currentProduct.stock);
+        // Update Stock/Size visibility
+        updateSizeAvailability();
     }
 
     function switchVariant(variant) {
@@ -127,7 +127,7 @@ $(document).ready(function() {
         }
 
         // Update size availability based on variant stock
-        updateSizeAvailability(variant.stock);
+        updateSizeAvailability();
     }
 
     function addThumbnail(url) {
@@ -141,18 +141,22 @@ $(document).ready(function() {
         if ($('.modal-thumb').length === 1) thumb.addClass('active');
     }
 
-    function updateSizeAvailability(stock) {
-        stock = parseInt(stock);
-        // Simple mock logic: if stock is very low, mock some sizes as out of stock
+    function updateSizeAvailability() {
+        if (!selectedVariant || !selectedVariant.sizes) {
+            $('.size-pill').removeClass('disabled');
+            return;
+        }
+
+        const stocks = selectedVariant.sizes;
         $('.size-pill').each(function() {
             const size = $(this).data('size');
-            $(this).removeClass('disabled');
+            const stock = parseInt(stocks[size] || 0);
             
-            // Randomly disable some for demo if global stock is low
-            if (stock < 5 && (size === 'XXL' || size === 'XS')) {
-                $(this).addClass('disabled');
-            } else if (stock === 0) {
-                $(this).addClass('disabled');
+            if (stock <= 0) {
+                $(this).addClass('disabled').removeClass('selected');
+                if (selectedSize === size) selectedSize = null;
+            } else {
+                $(this).removeClass('disabled');
             }
         });
     }

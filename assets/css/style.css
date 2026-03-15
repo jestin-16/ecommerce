@@ -1441,3 +1441,35 @@ body.luxury-dark-theme {
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(5px);
 }
+
+/* WISHLIST TOAST */
+.wishlist-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(26, 22, 22, 0.9);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 0; /* Keep BOREAL square aesthetic */
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    z-index: 3000;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.wishlist-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.wishlist-toast i {
+    color: var(--accent-warm);
+}
