@@ -57,12 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body class="luxury-dark-theme bg-boreal-darker d-flex flex-column min-vh-100">
+<body class="luxury-light-theme bg-white d-flex flex-column min-vh-100">
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 boreal-navbar bg-boreal-dark border-bottom border-dark-subtle">
+    <nav class="navbar navbar-expand-lg sticky-top p-3 boreal-navbar bg-white border-bottom border-light">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-white boreal-brand" href="index.php">
+            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-dark boreal-brand" href="index.php">
                 <i class="bi bi-asterisk me-2"></i>BOREAL <span class="fs-6 text-accent fw-normal text-capitalize ms-2">Admin</span>
             </a>
 
@@ -73,14 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="collapse navbar-collapse justify-content-center" id="borealNav">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="admin_dashboard.php">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="admin_dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a></li>
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center gap-4 text-white d-none d-lg-flex boreal-nav-icons">
-                <a href="logout.php" class="text-white" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
-                <a href="profile.php" class="text-white" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
+            <div class="d-flex align-items-center gap-4 text-dark d-none d-lg-flex boreal-nav-icons">
+                <a href="logout.php" class="text-dark" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
+                <a href="profile.php" class="text-dark" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
             </div>
         </div>
     </nav>
@@ -90,10 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container px-lg-5">
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 p-md-5">
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4 p-md-5">
                         <div class="text-center mb-4">
-                            <h2 class="text-white font-playfair mb-1">Add New Admin</h2>
-                            <p class="text-secondary-light tracking-wider fs-8 text-uppercase">Create administrative account</p>
+                            <h2 class="text-dark font-playfair mb-1">Add New Admin</h2>
+                            <p class="text-secondary tracking-wider fs-8 text-uppercase">Create administrative account</p>
                         </div>
 
                         <?php if ($error): ?>
@@ -103,33 +103,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
 
                         <?php if ($success): ?>
-                            <div class="alert alert-success rounded-0 border-0 fs-7 bg-dark text-success border-success" role="alert" style="background-color: rgba(25, 135, 84, 0.1) !important; border: 1px solid rgba(25, 135, 84, 0.2) !important;">
+                            <div class="alert alert-success rounded-0 border-0 fs-7 bg-light text-success border-success" role="alert" style="border: 1px solid rgba(25, 135, 84, 0.2) !important;">
                                 <?php echo htmlspecialchars($success); ?>
                             </div>
                         <?php endif; ?>
 
                         <form action="add_admin.php" method="POST">
                             <div class="mb-3">
-                                <label for="name" class="form-label text-white text-uppercase tracking-wider fs-8">Admin Name</label>
-                                <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" id="name" name="name" required value="<?php echo isset($_POST['name']) && empty($success) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                                <label for="name" class="form-label text-dark text-uppercase tracking-wider fs-8 fw-bold">Admin Name</label>
+                                <input type="text" class="form-control border-light rounded-0 shadow-none ps-2" id="name" name="name" required value="<?php echo isset($_POST['name']) && empty($success) ? htmlspecialchars($_POST['name']) : ''; ?>">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label text-white text-uppercase tracking-wider fs-8">Admin Email</label>
-                                <input type="email" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" id="email" name="email" required value="<?php echo isset($_POST['email']) && empty($success) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                                <label for="email" class="form-label text-dark text-uppercase tracking-wider fs-8 fw-bold">Admin Email</label>
+                                <input type="email" class="form-control border-light rounded-0 shadow-none ps-2" id="email" name="email" required value="<?php echo isset($_POST['email']) && empty($success) ? htmlspecialchars($_POST['email']) : ''; ?>">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label text-white text-uppercase tracking-wider fs-8">Password</label>
-                                <input type="password" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" id="password" name="password" required>
-                                <div class="form-text text-secondary-light fs-8 mt-1">Make sure you use a strong password.</div>
+                                <label for="password" class="form-label text-dark text-uppercase tracking-wider fs-8 fw-bold">Password</label>
+                                <input type="password" class="form-control border-light rounded-0 shadow-none ps-2" id="password" name="password" required>
+                                <div class="form-text text-secondary fs-8 mt-1">Make sure you use a strong password.</div>
                             </div>
                             <div class="mb-4">
-                                <label for="confirm_password" class="form-label text-white text-uppercase tracking-wider fs-8">Confirm Password</label>
-                                <input type="password" class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-2" id="confirm_password" name="confirm_password" required>
+                                <label for="confirm_password" class="form-label text-dark text-uppercase tracking-wider fs-8 fw-bold">Confirm Password</label>
+                                <input type="password" class="form-control border-light rounded-0 shadow-none ps-2" id="confirm_password" name="confirm_password" required>
                             </div>
                             
                             <div class="d-grid gap-3 mt-5">
-                                <button type="submit" class="btn btn-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider">Create Admin Account</button>
-                                <a href="admin_dashboard.php" class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark">Cancel</a>
+                                <button type="submit" class="btn btn-dark rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider">Create Admin Account</button>
+                                <a href="admin_dashboard.php" class="btn btn-outline-dark rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 
     <!-- Footer -->
-    <footer class="footer-boreal py-4 bg-boreal-deep mt-auto border-top border-dark-subtle">
+    <footer class="footer-boreal py-4 bg-light mt-auto border-top border-light">
         <div class="container px-lg-5 text-center">
-             <p class="text-secondary-light fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. All Rights Reserved.</p>
+             <p class="text-secondary fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. All Rights Reserved.</p>
         </div>
     </footer>
 

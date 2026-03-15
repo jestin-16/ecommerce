@@ -31,18 +31,18 @@ $orders = $stmt->fetchAll();
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body class="luxury-dark-theme bg-boreal-darker d-flex flex-column min-vh-100">
+<body class="luxury-light-theme bg-white d-flex flex-column min-vh-100">
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 boreal-navbar bg-boreal-dark border-bottom border-dark-subtle">
+    <nav class="navbar navbar-expand-lg sticky-top p-3 boreal-navbar bg-white border-bottom border-light">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-white boreal-brand" href="index.php">
+            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-dark boreal-brand" href="index.php">
                 <i class="bi bi-asterisk me-2"></i>BOREAL <span class="fs-6 text-accent fw-normal text-capitalize ms-2">Admin</span>
             </a>
-            <div class="d-flex align-items-center gap-4 text-white ms-auto">
-                 <a class="nav-link text-white text-uppercase fs-7 tracking-wider d-none d-md-block" href="admin_dashboard.php">Dashboard</a>
-                 <a class="nav-link text-white text-uppercase fs-7 tracking-wider d-none d-md-block" href="admin_products.php">Products</a>
-                 <a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a>
+            <div class="d-flex align-items-center gap-4 text-dark ms-auto">
+                 <a class="nav-link text-dark text-uppercase fs-7 tracking-wider d-none d-md-block" href="admin_dashboard.php">Dashboard</a>
+                 <a class="nav-link text-dark text-uppercase fs-7 tracking-wider d-none d-md-block" href="admin_products.php">Products</a>
+                 <a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a>
             </div>
         </div>
     </nav>
@@ -51,23 +51,21 @@ $orders = $stmt->fetchAll();
         <div class="container-fluid px-lg-5">
             <div class="d-flex justify-content-between align-items-end mb-4 border-bottom border-dark-subtle pb-3">
                 <div>
-                     <h2 class="text-white font-playfair mb-1">Manage Orders</h2>
+                     <h2 class="text-dark font-playfair mb-1">Manage Orders</h2>
                      <p class="text-secondary-light tracking-wider fs-8 text-uppercase mb-0">Total: <?php echo count($orders); ?> orders</p>
                 </div>
             </div>
 
-            <div id="action-alert" class="alert d-none rounded-0 border-0 fs-7"></div>
-
             <div class="table-responsive">
-                <table class="table table-dark table-hover border-secondary align-middle">
+                <table class="table table-hover align-middle border-light">
                     <thead>
-                        <tr class="text-secondary-light text-uppercase tracking-wider fs-8">
-                            <th scope="col" class="border-secondary fw-normal py-3 px-3">Order ID</th>
-                            <th scope="col" class="border-secondary fw-normal py-3">Customer</th>
-                            <th scope="col" class="border-secondary fw-normal py-3">Date</th>
-                            <th scope="col" class="border-secondary fw-normal py-3">Total</th>
-                            <th scope="col" class="border-secondary fw-normal py-3">Status</th>
-                            <th scope="col" class="border-secondary fw-normal py-3 text-end px-3">Actions</th>
+                        <tr class="text-secondary text-uppercase tracking-wider fs-8 bg-light">
+                            <th scope="col" class="fw-normal py-3 px-3">Order ID</th>
+                            <th scope="col" class="fw-normal py-3">Customer</th>
+                            <th scope="col" class="fw-normal py-3">Date</th>
+                            <th scope="col" class="fw-normal py-3">Total</th>
+                            <th scope="col" class="fw-normal py-3">Status</th>
+                            <th scope="col" class="fw-normal py-3 text-end px-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,16 +78,16 @@ $orders = $stmt->fetchAll();
                             if($o['status'] === 'Delivered') $statusClass = 'bg-success';
                             if($o['status'] === 'Cancelled') $statusClass = 'bg-danger';
                         ?>
-                        <tr class="border-secondary">
-                            <td class="font-mono text-white fs-7 px-3">#<?php echo str_pad($o['id'], 5, '0', STR_PAD_LEFT); ?></td>
+                        <tr class="border-light text-secondary">
+                            <td class="font-mono text-dark fs-7 px-3">#<?php echo str_pad($o['id'], 5, '0', STR_PAD_LEFT); ?></td>
                             <td>
-                                <div class="text-white fs-7"><?php echo htmlspecialchars($o['user_name']); ?></div>
-                                <div class="text-secondary-light fs-8"><?php echo htmlspecialchars($o['user_email']); ?></div>
+                                <div class="text-dark fs-7 fw-bold"><?php echo htmlspecialchars($o['user_name']); ?></div>
+                                <div class="text-secondary fs-8"><?php echo htmlspecialchars($o['user_email']); ?></div>
                             </td>
-                            <td class="text-secondary-light fs-7"><?php echo $date; ?></td>
-                            <td class="font-mono text-accent fs-7">$<?php echo number_format($o['total_amount'], 2); ?></td>
+                            <td class="text-secondary fs-7"><?php echo $date; ?></td>
+                            <td class="font-mono text-dark fs-7 fw-bold">$<?php echo number_format($o['total_amount'], 2); ?></td>
                             <td>
-                                <select class="form-select form-select-sm bg-dark text-white border-secondary rounded-0 shadow-none status-select" data-id="<?php echo $o['id']; ?>" style="width: auto; font-size: 0.8rem;">
+                                <select class="form-select form-select-sm bg-light text-dark border-light rounded-0 shadow-none status-select" data-id="<?php echo $o['id']; ?>" style="width: auto; font-size: 0.8rem;">
                                     <option value="Pending" <?php echo $o['status'] == 'Pending' ? 'selected' : ''; ?>>Pending</option>
                                     <option value="Processing" <?php echo $o['status'] == 'Processing' ? 'selected' : ''; ?>>Processing</option>
                                     <option value="Shipped" <?php echo $o['status'] == 'Shipped' ? 'selected' : ''; ?>>Shipped</option>
@@ -98,7 +96,7 @@ $orders = $stmt->fetchAll();
                                 </select>
                             </td>
                             <td class="text-end px-3">
-                                <a href="admin_order_details.php?id=<?php echo $o['id']; ?>" class="btn btn-sm btn-outline-light rounded-0 text-uppercase tracking-wider fs-8">
+                                <a href="admin_order_details.php?id=<?php echo $o['id']; ?>" class="btn btn-sm btn-outline-dark rounded-0 text-uppercase tracking-wider fs-8">
                                     View Details
                                 </a>
                             </td>
@@ -119,9 +117,9 @@ $orders = $stmt->fetchAll();
     </section>
 
     <!-- Footer -->
-    <footer class="footer-boreal py-4 border-top border-dark-subtle mt-auto bg-boreal-deep">
+    <footer class="footer-boreal py-4 border-top mt-auto bg-light">
         <div class="container text-center">
-             <p class="text-secondary-light fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. Admin Services.</p>
+             <p class="text-secondary fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. Admin Services.</p>
         </div>
     </footer>
 
@@ -142,9 +140,9 @@ $orders = $stmt->fetchAll();
                     success: function(response) {
                         const alertEl = $('#action-alert');
                         if(response.success) {
-                            alertEl.removeClass('d-none alert-danger').addClass('alert-success bg-dark text-success').html('<i class="bi bi-check-circle me-2"></i>' + response.message);
+                            alertEl.removeClass('d-none alert-danger').addClass('alert-success bg-light text-success').html('<i class="bi bi-check-circle me-2"></i>' + response.message);
                         } else {
-                            alertEl.removeClass('d-none alert-success').addClass('alert-danger text-danger bg-dark').html('<i class="bi bi-exclamation-triangle me-2"></i>' + response.message);
+                            alertEl.removeClass('d-none alert-success').addClass('alert-danger text-danger bg-light').html('<i class="bi bi-exclamation-triangle me-2"></i>' + response.message);
                         }
                         setTimeout(() => alertEl.addClass('d-none'), 3000);
                     },

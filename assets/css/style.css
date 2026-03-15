@@ -645,6 +645,95 @@ body.luxury-dark-theme {
 }
 .bg-accent { background-color: var(--accent-primary) !important; }
 
+/* =========================================
+   BOREAL LUXURY LIGHT THEME (WHITE THEME)
+   ========================================= */
+body.luxury-light-theme {
+    --bg-primary: #ffffff;
+    --bg-surface: #fcfcfc;
+    --bg-deep: #f4f4f4;
+    --boreal-dark: #fcfcfc;
+    --boreal-darker: #ffffff;
+    --boreal-deep: #f4f4f4;
+    
+    --accent-primary: #1a1616; /* Bistre */
+    --accent-hover: #2d2424;
+    --accent-warm: #84756b;    /* Bronze */
+    
+    --text-primary: #1a1616;
+    --text-secondary: #555555;
+    --text-inverse: #ffffff;
+    
+    --border: rgba(26, 22, 22, 0.1);
+    
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+body.luxury-light-theme .bg-glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.luxury-light-theme .text-white { color: var(--text-primary) !important; }
+body.luxury-light-theme .text-secondary-light { color: var(--text-secondary) !important; }
+body.luxury-light-theme .bg-boreal-dark, 
+body.luxury-light-theme .bg-boreal-darker, 
+body.luxury-light-theme .bg-boreal-deep { 
+    background-color: var(--bg-surface) !important; 
+}
+
+body.luxury-light-theme .navbar {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+body.luxury-light-theme .btn-light {
+    background-color: var(--accent-primary) !important;
+    color: var(--text-inverse) !important;
+    border: none;
+}
+
+body.luxury-light-theme .btn-outline-light {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+body.luxury-light-theme .btn-outline-light:hover {
+    background-color: var(--accent-primary) !important;
+    color: var(--text-inverse) !important;
+}
+
+body.luxury-light-theme .luxury-product-card:hover {
+    box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+}
+
+body.luxury-light-theme .hero-boreal {
+    background: radial-gradient(circle at 70% 50%, rgba(132, 117, 107, 0.05) 0%, #ffffff 60%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.luxury-light-theme .hero-title .the-line .text-reveal {
+    -webkit-text-stroke: 1px var(--accent-primary);
+    color: transparent;
+}
+
+body.luxury-light-theme .hero-title .frost-line .text-reveal {
+    color: var(--accent-primary);
+}
+
+body.luxury-light-theme .snow-deco {
+    color: var(--accent-primary);
+    opacity: 0.05;
+}
+
+body.luxury-light-theme .hover-dark:hover {
+    color: var(--accent-primary) !important;
+    background: transparent;
+}
+
+
+
 /* Hero */
 .hero-boreal {
     height: 90vh;

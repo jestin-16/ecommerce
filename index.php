@@ -30,12 +30,12 @@ $featuredProduct = !empty($products) ? $products[0] : null;
     <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 
-<body class="luxury-dark-theme">
+<body class="luxury-light-theme">
     <div class="scroll-progress" id="scroll-progress"></div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 boreal-navbar">
+    <nav class="navbar navbar-expand-lg sticky-top p-3 boreal-navbar">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-white boreal-brand" href="#">
+            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-dark boreal-brand" href="#">
                 <i class="bi bi-asterisk me-2"></i>BOREAL
             </a>
 
@@ -46,42 +46,42 @@ $featuredProduct = !empty($products) ? $products[0] : null;
 
             <div class="collapse navbar-collapse justify-content-center" id="borealNav">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="#">New
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="#">New
                             Arrivals</a></li>
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider"
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider"
                             href="#">Coats & Jackets</a></li>
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider"
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider"
                             href="#">Knitwear</a></li>
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider"
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider"
                             href="#">Footwear</a></li>
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider"
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider"
                             href="#">Accessories</a></li>
                     <li class="nav-item"><a class="nav-link text-danger text-uppercase fs-7 tracking-wider"
                             href="#">Sale</a></li>
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center gap-4 text-white d-none d-lg-flex boreal-nav-icons">
-                <a href="#" class="text-white"><i class="bi bi-search fs-5"></i></a>
+            <div class="d-flex align-items-center gap-4 text-dark d-none d-lg-flex boreal-nav-icons">
+                <a href="#" class="text-dark"><i class="bi bi-search fs-5"></i></a>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="logout.php" class="text-white" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
+                    <a href="logout.php" class="text-dark" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
                     <?php if ($_SESSION['role'] === 'admin'): ?>
-                        <a href="admin_dashboard.php" class="text-white" title="Admin Dashboard"><i
+                        <a href="admin_dashboard.php" class="text-dark" title="Admin Dashboard"><i
                                 class="bi bi-shield-lock fs-5"></i></a>
                     <?php else: ?>
-                        <a href="profile.php" class="text-white" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
+                        <a href="profile.php" class="text-dark" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="login.php" class="text-white" title="Login"><i class="bi bi-person fs-5"></i></a>
+                    <a href="login.php" class="text-dark" title="Login"><i class="bi bi-person fs-5"></i></a>
                 <?php endif; ?>
-                <a href="#" class="text-white"><i class="bi bi-heart fs-5"></i></a>
+                <a href="#" class="text-dark"><i class="bi bi-heart fs-5"></i></a>
                 <a href="#cartOffcanvas" data-bs-toggle="offcanvas" role="button" aria-controls="cartOffcanvas"
-                    class="text-white position-relative cursor-pointer" id="cart-btn">
+                    class="text-dark position-relative cursor-pointer" id="cart-btn">
                     <i class="bi bi-bag fs-5"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-accent"
                         id="cart-badge">0</span>
                 </a>
-                <a href="#" class="text-white"><i class="bi bi-list fs-4"></i></a>
+                <a href="#" class="text-dark"><i class="bi bi-list fs-4"></i></a>
             </div>
         </div>
     </nav>
@@ -93,26 +93,26 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                 <div class="col-lg-5 pe-lg-5 mb-5 mb-lg-0 z-2 hero-text-col">
                     <p class="hero-collection-kicker text-accent mb-4 fs-6 reveal-delay-1 scroll-reveal">Winter
                         Collection - 2026</p>
-                    <h1 class="display-1 fw-bold text-white lh-1 mb-4 hero-title">
+                    <h1 class="display-1 fw-bold text-dark lh-1 mb-4 hero-title">
                         <span class="text-reveal-wrap wear-line"><span class="text-reveal">WEAR</span></span><br>
                         <span class="text-reveal-wrap the-line"><span class="text-reveal"
                                 style="animation-delay: 0.2s">THE</span></span><br>
                         <span class="text-reveal-wrap frost-line"><span class="text-reveal"
                                 style="animation-delay: 0.4s">FROST</span></span>
                     </h1>
-                    <p class="text-secondary-light fs-5 mb-5 mw-400 text-reveal-item hero-intro-copy">
+                    <p class="text-secondary fs-5 mb-5 mw-400 text-reveal-item hero-intro-copy">
                         Curated for those who embrace the cold season with intention. Discover premium outerwear,
                         refined knitwear, and crafted essentials.
                     </p>
                     <div class="d-flex flex-wrap gap-3 hero-cta-row">
                         <a href="#"
-                            class="btn btn-light btn-lg rounded-0 px-5 py-3 text-uppercase tracking-wider fs-7 hero-primary-cta">Shop
+                            class="btn btn-dark btn-lg rounded-0 px-5 py-3 text-uppercase tracking-wider fs-7 hero-primary-cta">Shop
                             Collection <i class="bi bi-arrow-right ms-2"></i></a>
                         <a href="#"
-                            class="btn btn-outline-light btn-lg rounded-0 px-5 py-3 text-uppercase tracking-wider fs-7">View
+                            class="btn btn-outline-dark btn-lg rounded-0 px-5 py-3 text-uppercase tracking-wider fs-7">View
                             Lookbook</a>
                     </div>
-                    <div class="hero-rating-row mt-4 d-flex align-items-center gap-2 text-secondary-light">
+                    <div class="hero-rating-row mt-4 d-flex align-items-center gap-2 text-secondary">
                         <span class="text-accent"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i
                                 class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i
                                 class="bi bi-star-fill"></i></span>
@@ -147,24 +147,24 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                                     alt="<?php echo $featuredProduct['name']; ?>" class="w-100 h-100 object-fit-cover">
                                 <span class="floating-product-chip">FEATURED</span>
                             </div>
-                            <div class="floating-product-info text-white">
+                            <div class="floating-product-info text-dark">
                                 <p class="text-uppercase tracking-wider fs-8 mb-1 text-accent">
                                     <?php echo $featuredProduct['category']; ?></p>
                                 <h4 class="font-playfair fs-5 mb-2"><?php echo $featuredProduct['name']; ?></h4>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
                                     <div
-                                        class="qty-selector bg-dark-soft border border-secondary rounded-0 d-flex align-items-center px-2 py-1">
+                                        class="qty-selector bg-light border border-secondary rounded-0 d-flex align-items-center px-2 py-1">
                                         <button
-                                            class="btn btn-link text-white text-decoration-none p-0 px-2 fw-bold hero-qty-minus">-</button>
+                                            class="btn btn-link text-dark text-decoration-none p-0 px-2 fw-bold hero-qty-minus">-</button>
                                         <span class="px-2 font-mono hero-qty-val">1</span>
                                         <button
-                                            class="btn btn-link text-white text-decoration-none p-0 px-2 fw-bold hero-qty-plus">+</button>
+                                            class="btn btn-link text-dark text-decoration-none p-0 px-2 fw-bold hero-qty-plus">+</button>
                                     </div>
-                                    <p class="font-mono fs-4 text-white mb-0">
+                                    <p class="font-mono fs-4 text-dark mb-0">
                                         $<?php echo number_format($featuredProduct['price'], 2); ?></p>
                                 </div>
                                 <button
-                                    class="btn btn-light rounded-0 w-100 py-2 text-uppercase fs-7 fw-bold add-to-cart-btn"
+                                    class="btn btn-dark rounded-0 w-100 py-2 text-uppercase fs-7 fw-bold add-to-cart-btn"
                                     data-id="<?php echo $featuredProduct['id']; ?>">Add to Cart</button>
                             </div>
                         </div>
@@ -175,34 +175,34 @@ $featuredProduct = !empty($products) ? $products[0] : null;
     </section>
 
     <!-- Product Grid Section -->
-    <section class="products-section py-6 bg-boreal-dark scroll-reveal">
+    <section class="products-section py-6 bg-white scroll-reveal">
         <div class="container px-lg-5">
             <div
                 class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 scroll-reveal reveal-delay-1">
                 <div>
-                    <h2 class="display-5 fw-bold text-white font-playfair mb-3">Curated Selection</h2>
-                    <p class="text-secondary-light">Exclusive pieces designed to elevate your winter wardrobe.</p>
+                    <h2 class="display-5 fw-bold text-dark font-playfair mb-3">Curated Selection</h2>
+                    <p class="text-secondary">Exclusive pieces designed to elevate your winter wardrobe.</p>
                 </div>
 
                 <div class="mt-4 mt-md-0">
                     <div class="d-flex flex-wrap gap-2 gap-md-4 luxury-filters">
                         <a href="#"
-                            class="category-btn text-white text-decoration-none text-uppercase fs-7 tracking-wider active-filter"
+                            class="category-btn text-dark text-decoration-none text-uppercase fs-7 tracking-wider active-filter"
                             data-category="All">All</a>
                         <a href="#"
-                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-white"
+                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-dark"
                             data-category="Coats & Jackets">Coats & Jackets</a>
                         <a href="#"
-                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-white"
+                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-dark"
                             data-category="Knitwear">Knitwear</a>
                         <a href="#"
-                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-white"
+                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-dark"
                             data-category="Footwear">Footwear</a>
                         <a href="#"
-                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-white"
+                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-dark"
                             data-category="Accessories">Accessories</a>
                         <a href="#"
-                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-white"
+                            class="category-btn text-secondary text-decoration-none text-uppercase fs-7 tracking-wider hover-dark"
                             data-category="Sale">Sale</a>
                     </div>
                 </div>
@@ -236,31 +236,31 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                             <div class="card bg-transparent border-0 luxury-product-card h-100">
                                 <div class="position-relative overflow-hidden product-image-wrapper mb-3">
                                     <?php echo $badgeHtml; ?>
-                                    <button class="btn btn-link text-white position-absolute top-0 end-0 m-2 wishlist-btn"><i
+                                    <button class="btn btn-link text-dark position-absolute top-0 end-0 m-2 wishlist-btn"><i
                                             class="bi bi-heart"></i></button>
                                     <img src="<?php echo $product['image_url']; ?>"
-                                        class="card-img-top rounded-0 object-fit-cover product-img-height mix-blend-mode-lighten"
+                                        class="card-img-top rounded-0 object-fit-cover product-img-height mix-blend-mode-multiply"
                                         alt="<?php echo $product['name']; ?>" loading="lazy">
                                     <div
                                         class="product-overlay d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 bg-overlay opacity-0 transition-all">
                                         <button
-                                            class="btn btn-outline-light rounded-0 px-4 py-2 text-uppercase fs-8 tracking-wider add-to-cart-btn"
-                                            data-id="<?php echo $product['id']; ?>" <?php echo $btnDisabled; ?>>
-                                            <?php echo $btnText; ?>
+                                            class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fs-8 tracking-wider add-to-cart-btn"
+                                            data-id="<?php echo $product['id']; ?>">
+                                            <?php echo "VIEW DETAILS"; ?>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="card-body px-0 pt-2 pb-0">
                                     <div class="d-flex justify-content-between align-items-start mb-1">
                                         <p class="text-accent text-uppercase fs-8 tracking-wider mb-0">BOREAL</p>
-                                        <div class="rating text-white fs-8">
+                                        <div class="rating text-dark fs-8">
                                             <i class="bi bi-star-fill text-accent-warm"></i> <?php echo $rating; ?>
                                         </div>
                                     </div>
-                                    <h5 class="card-title text-white font-playfair fs-5 mb-2"><?php echo $product['name']; ?>
+                                    <h5 class="card-title text-dark font-playfair fs-5 mb-2"><?php echo $product['name']; ?>
                                     </h5>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <p class="card-text text-white font-mono fs-5 mb-0">
+                                        <p class="card-text text-dark font-mono fs-5 mb-0">
                                             $<?php echo number_format($product['price'], 2); ?></p>
                                         <div class="color-swatches d-flex gap-1">
                                             <span class="swatch bg-dark border border-secondary rounded-circle d-block"
@@ -285,137 +285,137 @@ $featuredProduct = !empty($products) ? $products[0] : null;
     </section>
 
     <!-- Features Section -->
-    <section class="features-section py-5 border-top border-bottom border-dark-subtle bg-boreal-darker scroll-reveal">
+    <section class="features-section py-5 border-top border-bottom border-light bg-white scroll-reveal">
         <div class="container px-lg-5">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 text-center text-lg-start">
                 <div class="col p-4 feature-box scroll-reveal reveal-delay-1">
-                    <i class="bi bi-box-seam text-white fs-2 mb-3 d-inline-block"></i>
-                    <h5 class="text-white text-uppercase tracking-wider fs-7 mb-2">Free Shipping</h5>
-                    <p class="text-secondary-light fs-7 mb-0">Complimentary worldwide express shipping on all orders.
+                    <i class="bi bi-box-seam text-dark fs-2 mb-3 d-inline-block"></i>
+                    <h5 class="text-dark text-uppercase tracking-wider fs-7 mb-2">Free Shipping</h5>
+                    <p class="text-secondary fs-7 mb-0">Complimentary worldwide express shipping on all orders.
                     </p>
                 </div>
                 <div class="col p-4 feature-box scroll-reveal reveal-delay-2">
-                    <i class="bi bi-shield-check text-white fs-2 mb-3 d-inline-block"></i>
-                    <h5 class="text-white text-uppercase tracking-wider fs-7 mb-2">Authenticity Guarantee</h5>
-                    <p class="text-secondary-light fs-7 mb-0">Every piece is certified authentic and comes with origin
+                    <i class="bi bi-shield-check text-dark fs-2 mb-3 d-inline-block"></i>
+                    <h5 class="text-dark text-uppercase tracking-wider fs-7 mb-2">Authenticity Guarantee</h5>
+                    <p class="text-secondary fs-7 mb-0">Every piece is certified authentic and comes with origin
                         proof.</p>
                 </div>
                 <div class="col p-4 feature-box scroll-reveal reveal-delay-3">
-                    <i class="bi bi-lock text-white fs-2 mb-3 d-inline-block"></i>
-                    <h5 class="text-white text-uppercase tracking-wider fs-7 mb-2">Secure Payments</h5>
-                    <p class="text-secondary-light fs-7 mb-0">Encrypted transactions for your peace of mind.</p>
+                    <i class="bi bi-lock text-dark fs-2 mb-3 d-inline-block"></i>
+                    <h5 class="text-dark text-uppercase tracking-wider fs-7 mb-2">Secure Payments</h5>
+                    <p class="text-secondary fs-7 mb-0">Encrypted transactions for your peace of mind.</p>
                 </div>
                 <div class="col p-4 feature-box scroll-reveal reveal-delay-4">
-                    <i class="bi bi-arrow-return-left text-white fs-2 mb-3 d-inline-block"></i>
-                    <h5 class="text-white text-uppercase tracking-wider fs-7 mb-2">30-Day Returns</h5>
-                    <p class="text-secondary-light fs-7 mb-0">Effortless returns and exchanges within 30 days.</p>
+                    <i class="bi bi-arrow-return-left text-dark fs-2 mb-3 d-inline-block"></i>
+                    <h5 class="text-dark text-uppercase tracking-wider fs-7 mb-2">30-Day Returns</h5>
+                    <p class="text-secondary fs-7 mb-0">Effortless returns and exchanges within 30 days.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer-boreal py-6 bg-boreal-deep pt-5 pb-4">
+    <footer class="footer-boreal py-6 bg-light pt-5 pb-4">
         <div class="container px-lg-5">
-            <div class="row g-5 mb-5 pb-4 border-bottom border-dark-subtle">
+            <div class="row g-5 mb-5 pb-4 border-bottom">
                 <div class="col-lg-4 pe-lg-5">
-                    <a class="text-decoration-none text-uppercase fw-bold fs-3 tracking-wide text-white mb-4 d-block"
+                    <a class="text-decoration-none text-uppercase fw-bold fs-3 tracking-wide text-dark mb-4 d-block"
                         href="#">
                         BOREAL
                     </a>
-                    <p class="text-secondary-light text-start pe-lg-4 fs-7 mb-4">
+                    <p class="text-secondary text-start pe-lg-4 fs-7 mb-4">
                         Redefining winter apparel through avant-garde design, unparalleled warmth, and sustainable
                         luxury practices.
                     </p>
                     <form class="mb-4">
-                        <label class="text-white text-uppercase tracking-wider fs-8 mb-2 d-block">Subscribe to
+                        <label class="text-dark text-uppercase tracking-wider fs-8 mb-2 d-block">Subscribe to
                             Newsletter</label>
                         <div class="input-group">
                             <input type="email"
-                                class="form-control bg-transparent border-secondary text-white rounded-0 shadow-none ps-0"
+                                class="form-control bg-transparent border-secondary text-dark rounded-0 shadow-none ps-0"
                                 placeholder="Email Address">
-                            <button class="btn btn-outline-light rounded-0 text-uppercase tracking-wider fs-8 px-3"
+                            <button class="btn btn-outline-dark rounded-0 text-uppercase tracking-wider fs-8 px-3"
                                 type="button">Join</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="col-lg-2 col-md-4">
-                    <h6 class="text-white text-uppercase tracking-wider fs-7 mb-4">Shop</h6>
+                    <h6 class="text-dark text-uppercase tracking-wider fs-7 mb-4">Shop</h6>
                     <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">New
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">New
                                 Arrivals</a></li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Coats</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Coats</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Knitwear</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Knitwear</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Sale</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Sale</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-4">
-                    <h6 class="text-white text-uppercase tracking-wider fs-7 mb-4">Company</h6>
+                    <h6 class="text-dark text-uppercase tracking-wider fs-7 mb-4">Company</h6>
                     <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">About
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">About
                                 Us</a></li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Sustainability</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Sustainability</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Careers</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Careers</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Press</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Press</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-4">
-                    <h6 class="text-white text-uppercase tracking-wider fs-7 mb-4">Support</h6>
+                    <h6 class="text-dark text-uppercase tracking-wider fs-7 mb-4">Support</h6>
                     <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Contact</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Contact</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Shipping</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Shipping</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">Returns</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Returns</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary-light text-decoration-none hover-white fs-7 text-uppercase tracking-widest">FAQ</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">FAQ</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <p class="text-secondary-light fs-8 mb-3 mb-md-0 text-uppercase tracking-widest">© 2026 BOREAL. All
+                <p class="text-secondary fs-8 mb-3 mb-md-0 text-uppercase tracking-widest">© 2026 BOREAL. All
                     Rights Reserved.</p>
                 <div class="d-flex gap-4">
-                    <a href="#" class="text-white hover-accent"><i class="bi bi-instagram fs-5"></i></a>
-                    <a href="#" class="text-white hover-accent"><i class="bi bi-twitter-x fs-5"></i></a>
-                    <a href="#" class="text-white hover-accent"><i class="bi bi-tiktok fs-5"></i></a>
+                    <a href="#" class="text-dark hover-accent"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="#" class="text-dark hover-accent"><i class="bi bi-twitter-x fs-5"></i></a>
+                    <a href="#" class="text-dark hover-accent"><i class="bi bi-tiktok fs-5"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Cart Offcanvas -->
-    <div class="offcanvas offcanvas-end bg-boreal-darker text-white shadow-luxury boreal-cart-offcanvas border-start border-dark-subtle"
+    <div class="offcanvas offcanvas-end bg-white text-dark shadow-luxury boreal-cart-offcanvas border-start"
         tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-        <div class="offcanvas-header border-bottom border-dark-subtle p-4">
+        <div class="offcanvas-header border-bottom p-4">
             <h5 class="offcanvas-title font-playfair fs-4 d-flex align-items-center gap-2" id="cartOffcanvasLabel">
-                Your Collection <span class="badge bg-accent rounded-pill fs-7 ms-2 text-dark"
+                Your Collection <span class="badge bg-accent rounded-pill fs-7 ms-2 text-white"
                     id="cart-count-title">0</span>
             </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         </div>
 
@@ -425,16 +425,16 @@ $featuredProduct = !empty($products) ? $products[0] : null;
             </div>
 
             <!-- Cart Footer -->
-            <div class="cart-footer mt-auto p-4 bg-boreal-deep border-top border-dark-subtle">
+            <div class="cart-footer mt-auto p-4 bg-light border-top">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <span class="fs-6 text-uppercase tracking-wider text-secondary-light">Subtotal</span>
-                    <span class="fs-4 font-mono text-white fw-bold" id="cart-total">$0.00</span>
+                    <span class="fs-6 text-uppercase tracking-wider text-secondary">Subtotal</span>
+                    <span class="fs-4 font-mono text-dark fw-bold" id="cart-total">$0.00</span>
                 </div>
                 <div class="d-grid gap-3">
                     <a href="checkout.php"
-                        class="btn btn-outline-light rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider hover-dark w-100 text-center text-decoration-none"
+                        class="btn btn-dark rounded-0 py-3 text-uppercase fs-7 fw-bold tracking-wider w-100 text-center text-decoration-none"
                         id="checkout-btn">Proceed to Checkout</a>
-                    <button class="btn btn-link text-secondary text-uppercase fs-8 text-decoration-none hover-white"
+                    <button class="btn btn-link text-secondary text-uppercase fs-8 text-decoration-none hover-dark"
                         id="clear-cart-btn">Empty Collection</button>
                 </div>
             </div>

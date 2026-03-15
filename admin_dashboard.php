@@ -54,12 +54,12 @@ $total_orders = $stmt->fetch()['total_orders'];
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body class="luxury-dark-theme bg-boreal-darker d-flex flex-column min-vh-100">
+<body class="luxury-light-theme bg-white d-flex flex-column min-vh-100">
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 boreal-navbar bg-boreal-dark border-bottom border-dark-subtle">
+    <nav class="navbar navbar-expand-lg sticky-top p-3 boreal-navbar bg-white border-bottom border-light">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-white boreal-brand" href="index.php">
+            <a class="navbar-brand text-uppercase fw-bold fs-3 tracking-wide text-dark boreal-brand" href="index.php">
                 <i class="bi bi-asterisk me-2"></i>BOREAL <span class="fs-6 text-accent fw-normal text-capitalize ms-2">Admin</span>
             </a>
 
@@ -70,13 +70,13 @@ $total_orders = $stmt->fetch()['total_orders'];
 
             <div class="collapse navbar-collapse justify-content-center" id="borealNav">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item"><a class="nav-link text-white text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark text-uppercase fs-7 tracking-wider" href="index.php">Return to Shop</a></li>
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center gap-4 text-white d-none d-lg-flex boreal-nav-icons">
-                <a href="logout.php" class="text-white" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
-                <a href="profile.php" class="text-white" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
+            <div class="d-flex align-items-center gap-4 text-dark d-none d-lg-flex boreal-nav-icons">
+                <a href="logout.php" class="text-dark" title="Logout"><i class="bi bi-box-arrow-right fs-5"></i></a>
+                <a href="profile.php" class="text-dark" title="Profile"><i class="bi bi-person-check fs-5"></i></a>
             </div>
         </div>
     </nav>
@@ -94,52 +94,52 @@ $total_orders = $stmt->fetch()['total_orders'];
             <div class="row g-4 mb-5">
                 <!-- Stat Card 1 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 h-100">
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="text-secondary-light text-uppercase tracking-wider fs-8 mb-0">Total Users</h5>
+                            <h5 class="text-secondary text-uppercase tracking-wider fs-8 mb-0">Total Users</h5>
                             <i class="bi bi-people text-accent fs-4"></i>
                         </div>
-                        <h2 class="text-white font-mono mb-0"><?php echo $total_users; ?></h2>
+                        <h2 class="text-dark font-mono mb-0"><?php echo $total_users; ?></h2>
                     </div>
                 </div>
                 
                 <!-- Stat Card 2 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 h-100">
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="text-secondary-light text-uppercase tracking-wider fs-8 mb-0">Orders</h5>
+                            <h5 class="text-secondary text-uppercase tracking-wider fs-8 mb-0">Orders</h5>
                             <i class="bi bi-bag text-accent fs-4"></i>
                         </div>
-                        <h2 class="text-white font-mono mb-0"><?php echo $total_orders; ?></h2>
+                        <h2 class="text-dark font-mono mb-0"><?php echo $total_orders; ?></h2>
                     </div>
                 </div>
 
                 <!-- Stat Card 3 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 h-100">
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="text-secondary-light text-uppercase tracking-wider fs-8 mb-0">Products</h5>
+                            <h5 class="text-secondary text-uppercase tracking-wider fs-8 mb-0">Products</h5>
                             <i class="bi bi-box-seam text-accent fs-4"></i>
                         </div>
-                        <h2 class="text-white font-mono mb-0"><?php echo $total_products; ?></h2>
+                        <h2 class="text-dark font-mono mb-0"><?php echo $total_products; ?></h2>
                     </div>
                 </div>
 
                 <!-- Stat Card 4 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4 h-100">
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4 h-100">
                          <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="text-secondary-light text-uppercase tracking-wider fs-8 mb-0">Quick Actions</h5>
+                            <h5 class="text-secondary text-uppercase tracking-wider fs-8 mb-0">Quick Actions</h5>
                             <i class="bi bi-lightning text-accent fs-4"></i>
                         </div>
                         <div class="mt-auto">
-                            <a href="admin_products.php" class="btn btn-outline-light rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark mb-2">
+                            <a href="admin_products.php" class="btn btn-outline-dark rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark mb-2">
                                 <i class="bi bi-box me-2"></i>Manage Products
                             </a>
-                            <a href="admin_orders.php" class="btn btn-outline-light rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark mb-2">
+                            <a href="admin_orders.php" class="btn btn-outline-dark rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark mb-2">
                                 <i class="bi bi-cart me-2"></i>Manage Orders
                             </a>
-                            <a href="add_admin.php" class="btn btn-outline-light rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark">
+                            <a href="add_admin.php" class="btn btn-outline-dark rounded-0 w-100 py-2 text-uppercase fs-8 fw-bold tracking-wider hover-dark">
                                 <i class="bi bi-person-plus me-2"></i>Add New Admin
                             </a>
                         </div>
@@ -149,11 +149,11 @@ $total_orders = $stmt->fetch()['total_orders'];
 
             <div class="row">
                 <div class="col-12">
-                    <div class="card bg-boreal-dark border border-dark-subtle rounded-0 shadow-luxury p-4">
-                        <h4 class="text-white font-playfair mb-4">Recent Activity</h4>
+                    <div class="card bg-white border border-light rounded-0 shadow-sm p-4">
+                        <h4 class="text-dark font-playfair mb-4">Recent Activity</h4>
                         <div class="text-center py-5">
                             <i class="bi bi-clock-history text-secondary-light fs-1 mb-3"></i>
-                            <p class="text-secondary-light mb-0">No recent activity to display.</p>
+                            <p class="text-secondary mb-0">No recent activity to display.</p>
                         </div>
                     </div>
                 </div>
@@ -162,9 +162,9 @@ $total_orders = $stmt->fetch()['total_orders'];
     </section>
 
     <!-- Footer -->
-    <footer class="footer-boreal py-4 bg-boreal-deep mt-auto border-top border-dark-subtle">
+    <footer class="footer-boreal py-4 bg-light mt-auto border-top">
         <div class="container px-lg-5 text-center">
-             <p class="text-secondary-light fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. All Rights Reserved.</p>
+             <p class="text-secondary fs-8 mb-0 text-uppercase tracking-widest">© 2026 BOREAL. All Rights Reserved.</p>
         </div>
     </footer>
 

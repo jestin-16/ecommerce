@@ -43,9 +43,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#checkout-btn').on('click', function () {
-        alert('Checkout functionality is not implemented in this demo.');
-    });
 });
 
 /**

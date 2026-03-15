@@ -32,20 +32,48 @@ try {
         $category = $_POST['category'] ?? '';
         $stock = $_POST['stock'] ?? 0;
         $image_url = $_POST['image_url'] ?? 'images/default.png';
+        $variants = $_POST['variants'] ?? []; // Array of variants
 
         if (empty($name) || empty($category) || $price <= 0) {
             throw new Exception('Name, Category, and valid Price are required.');
         }
 
-        if ($action === 'add') {
-            $stmt = $pdo->prepare("INSERT INTO products (name, description, price, image_url, category, stock) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $description, $price, $image_url, $category, $stock]);
-            jsonResponse(true, [], 'Product added successfully.');
-        } else {
-            if (!$id) throw new Exception('Product ID required for editing.');
-            $stmt = $pdo->prepare("UPDATE products SET name=?, description=?, price=?, image_url=?, category=?, stock=? WHERE id=?");
-            $stmt->execute([$name, $description, $price, $image_url, $category, $stock, $id]);
-            jsonResponse(true, [], 'Product updated successfully.');
+        $pdo->beginTransaction();
+
+        try {
+            if ($action === 'add') {
+                $stmt = $pdo->prepare("INSERT INTO products (name, description, price, image_url, category, stock) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$name, $description, $price, $image_url, $category, $stock]);
+                $id = $pdo->lastInsertId();
+            } else {
+                if (!$id) throw new Exception('Product ID required for editing.');
+                $stmt = $pdo->prepare("UPDATE products SET name=?, description=?, price=?, image_url=?, category=?, stock=? WHERE id=?");
+                $stmt->execute([$name, $description, $price, $image_url, $category, $stock, $id]);
+                
+                // For editing, we'll clear old variants and re-add them (simplest way)
+                $pdo->prepare("DELETE FROM product_variants WHERE product_id = ?")->execute([$id]);
+            }
+
+            // Save variants
+            if (!empty($variants)) {
+                $variantStmt = $pdo->prepare("INSERT INTO product_variants (product_id, color_name, color_hex, image_url, stock) VALUES (?, ?, ?, ?, ?)");
+                foreach ($variants as $v) {
+                    if (empty($v['color_name']) || empty($v['color_hex'])) continue;
+                    $variantStmt->execute([
+                        $id, 
+                        $v['color_name'], 
+                        $v['color_hex'], 
+                        $v['image_url'] ?? $image_url,
+                        $v['stock'] ?? 0
+                    ]);
+                }
+            }
+
+            $pdo->commit();
+            jsonResponse(true, [], ($action === 'add' ? 'Product added' : 'Product updated') . ' successfully.');
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
         }
     } else {
         throw new Exception('Invalid action.');
