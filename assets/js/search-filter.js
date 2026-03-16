@@ -21,22 +21,39 @@ $(document).ready(function () {
         }
     }, 400));
 
-    // Category Filter Handler
-    $categoryBtns.on('click', function () {
+    // Category Filter Handler (Grid Buttons & Navbar Links)
+    $(document).on('click', '.category-btn, .filter-link', function (e) {
+        e.preventDefault();
         const category = $(this).data('category');
 
-        // Update active state
-        $categoryBtns.removeClass('active-filter bg-dark text-white').addClass('text-dark opacity-50');
-        $(this).removeClass('opacity-50').addClass('active-filter bg-dark text-white');
+        // Update active state for grid buttons
+        $('.category-btn').removeClass('active-filter active-filter-luxury').css('opacity', '0.6');
+        $(`.category-btn[data-category="${category}"]`).removeClass('text-secondary').addClass('active-filter active-filter-luxury').css('opacity', '1');
+
+        // Update active state for navbar links
+        $('.filter-link').removeClass('active');
+        $(`.filter-link[data-category="${category}"]`).addClass('active');
 
         // Clear search input
         $searchInput.val('');
 
-        // Update Title
-        $('#current-category-title').text(category === 'All' ? 'All Products' : category);
+        // Update Title if it exists
+        const $title = $('#current-category-title');
+        if ($title.length) {
+            $title.text(category === 'All' ? 'All Products' : category);
+        }
 
         // Load products based on category
-        loadProducts(category);
+        if (typeof loadProducts === 'function') {
+            loadProducts(category);
+        }
+        
+        // Scroll to products if clicked from navbar
+        if ($(this).hasClass('filter-link')) {
+            $('html, body').animate({
+                scrollTop: $('.products-section').offset().top - 100
+            }, 800);
+        }
     });
 });
 
