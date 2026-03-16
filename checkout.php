@@ -68,21 +68,25 @@ if (empty($cart) || $subtotal <= 0) {
                             <div class="mb-4">
                                 <label for="address" class="form-label text-dark text-uppercase tracking-wider fs-8">Complete Shipping Address</label>
                                 <textarea class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" id="address" name="address" rows="3" required placeholder="Street, City, Postal Code, Country"></textarea>
+                                <div class="invalid-feedback fs-8">Please provide a valid shipping address (min 10 characters).</div>
                             </div>
                             <!-- Mock Payment info just for visual completeness -->
                             <h4 class="text-dark font-playfair mb-4 mt-5">Payment Method</h4>
                             <div class="mb-3">
                                 <label class="form-label text-dark text-uppercase tracking-wider fs-8">Card Number</label>
-                                <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="**** **** **** ****" required>
+                                <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" id="card_number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                                <div class="invalid-feedback fs-8">Enter a valid 16-digit card number.</div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-6">
                                      <label class="form-label text-dark text-uppercase tracking-wider fs-8">Expiry</label>
-                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="MM/YY" required>
+                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                                     <div class="invalid-feedback fs-8">Use MM/YY format.</div>
                                 </div>
                                 <div class="col-6">
                                      <label class="form-label text-dark text-uppercase tracking-wider fs-8">CVC</label>
-                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" placeholder="***" required>
+                                     <input type="text" class="form-control bg-transparent border text-dark rounded-0 shadow-none ps-2" id="cvc" placeholder="***" maxlength="4" required>
+                                     <div class="invalid-feedback fs-8">3 or 4 digits.</div>
                                 </div>
                             </div>
 
@@ -141,8 +145,86 @@ if (empty($cart) || $subtotal <= 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Validation Helper Functions
+            function validateField(field, condition) {
+                if (condition) {
+                    field.removeClass('is-invalid').addClass('is-valid');
+                    return true;
+                } else {
+                    field.removeClass('is-valid').addClass('is-invalid');
+                    return false;
+                }
+            }
+
+            // Card Number Formatting
+            $('#card_number').on('input', function() {
+                let val = $(this).val().replace(/\D/g, '');
+                let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+                $(this).val(formatted);
+                validateField($(this), val.length === 16);
+            });
+
+            // Expiry Formatting (MM/YY)
+            $('#expiry').on('input', function() {
+                let val = $(this).val().replace(/\D/g, '');
+                if (val.length > 2) {
+                    val = val.substring(0, 2) + '/' + val.substring(2, 4);
+                }
+                $(this).val(val);
+                
+                let isValidFormat = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(val);
+                if (isValidFormat && val.length === 5) {
+                    let parts = val.split('/');
+                    let expMonth = parseInt(parts[0], 10);
+                    let expYear = parseInt('20' + parts[1], 10);
+                    let now = new Date();
+                    let currentMonth = now.getMonth() + 1;
+                    let currentYear = now.getFullYear();
+                    
+                    let isExpired = (expYear < currentYear) || (expYear === currentYear && expMonth < currentMonth);
+                    validateField($(this), !isExpired);
+                } else {
+                    $(this).removeClass('is-valid').addClass('is-invalid');
+                }
+            });
+
+            // CVC Validation
+            $('#cvc').on('input', function() {
+                let val = $(this).val().replace(/\D/g, '');
+                $(this).val(val);
+                validateField($(this), val.length >= 3 && val.length <= 4);
+            });
+
+            // Address Validation
+            $('#address').on('input', function() {
+                validateField($(this), $(this).val().trim().length >= 10);
+            });
+
             $('#checkout-form').on('submit', function(e) {
                 e.preventDefault();
+
+                // Final check before submission
+                let isAddressValid = validateField($('#address'), $('#address').val().trim().length >= 10);
+                let isCardValid = validateField($('#card_number'), $('#card_number').val().replace(/\D/g, '').length === 16);
+                let isCvcValid = validateField($('#cvc'), $('#cvc').val().replace(/\D/g, '').length >= 3);
+                
+                // Expiry re-validation
+                let expiryVal = $('#expiry').val();
+                let isExpiryValid = false;
+                if (/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(expiryVal)) {
+                    let parts = expiryVal.split('/');
+                    let expMonth = parseInt(parts[0], 10);
+                    let expYear = parseInt('20' + parts[1], 10);
+                    let now = new Date();
+                    let isExpired = (expYear < now.getFullYear()) || (expYear === now.getFullYear() && expMonth < (now.getMonth() + 1));
+                    isExpiryValid = !isExpired;
+                }
+                validateField($('#expiry'), isExpiryValid);
+
+                if (!isAddressValid || !isCardValid || !isCvcValid || !isExpiryValid) {
+                    $('#checkout-alert').removeClass('d-none alert-success').addClass('alert-danger').html('<i class="bi bi-exclamation-triangle me-2"></i>Please correct the errors in the form.');
+                    return;
+                }
                 
                 const btn = $('#place-order-btn');
                 const originalText = btn.text();
@@ -160,7 +242,7 @@ if (empty($cart) || $subtotal <= 0) {
                             $('#checkout-alert').removeClass('d-none alert-danger').addClass('alert-success border text-dark').html('<i class="bi bi-check-circle me-2 text-success"></i>' + response.message + ' Redirecting...');
                             btn.html('<i class="bi bi-check"></i> Success');
                             setTimeout(() => {
-                                window.location.href = 'index.php'; // Or an order success page
+                                window.location.href = 'index.php';
                             }, 2000);
                         } else {
                             $('#checkout-alert').removeClass('d-none alert-success').addClass('alert-danger').html('<i class="bi bi-exclamation-triangle me-2"></i>' + response.message);

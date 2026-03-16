@@ -16,6 +16,7 @@ if (!isset($_SESSION['cart'][$cartKey])) {
 
 $productId = $_SESSION['cart'][$cartKey]['product_id'];
 $variantId = $_SESSION['cart'][$cartKey]['variant_id'];
+$size = $_SESSION['cart'][$cartKey]['size'] ?? '';
 
 try {
     if ($quantity <= 0) {
@@ -24,16 +25,22 @@ try {
         // Optional: Check stock constraint before updating
         // If variantId is present, check variant stock, else check product stock
         if ($variantId) {
-             $stmt = $pdo->prepare("SELECT stock FROM product_variants WHERE id = :id");
-             $stmt->execute(['id' => $variantId]);
+             if ($size !== '') {
+                 $stmt = $pdo->prepare("SELECT stock FROM variant_stocks WHERE variant_id = :id AND size = :size");
+                 $stmt->execute(['id' => $variantId, 'size' => $size]);
+             } else {
+                 $stmt = $pdo->prepare("SELECT SUM(stock) FROM variant_stocks WHERE variant_id = :id");
+                 $stmt->execute(['id' => $variantId]);
+             }
         } else {
              $stmt = $pdo->prepare("SELECT stock FROM products WHERE id = :id");
              $stmt->execute(['id' => $productId]);
         }
         $stock = $stmt->fetchColumn();
 
-        if ($stock !== false && $stock < $quantity) {
-            jsonResponse(false, [], 'Not enough stock available. Max: ' . $stock);
+        $max = (int)($stock ?? 0);
+        if ($stock !== false && $max < $quantity) {
+            jsonResponse(false, [], 'Not enough stock available. Max: ' . $max);
         }
 
         $_SESSION['cart'][$cartKey]['qty'] = $quantity;

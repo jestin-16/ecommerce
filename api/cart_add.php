@@ -19,10 +19,6 @@ try {
         jsonResponse(false, [], 'Product not found.');
     }
 
-    if ($product['stock'] < $quantity) {
-        jsonResponse(false, [], 'Not enough stock available.');
-    }
-
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -30,6 +26,27 @@ try {
     $color = isset($_POST['color']) ? $_POST['color'] : '';
     $size = isset($_POST['size']) ? $_POST['size'] : '';
     $variantId = isset($_POST['variant_id']) ? (int)$_POST['variant_id'] : null;
+
+    // Stock check:
+    // - If variant selected: use variant_stocks (per size if provided, else total)
+    // - Else: use products.stock
+    if ($variantId) {
+        if ($size !== '') {
+            $stmtStock = $pdo->prepare("SELECT stock FROM variant_stocks WHERE variant_id = ? AND size = ?");
+            $stmtStock->execute([$variantId, $size]);
+            $stock = (int)($stmtStock->fetchColumn() ?? 0);
+        } else {
+            $stmtStock = $pdo->prepare("SELECT SUM(stock) FROM variant_stocks WHERE variant_id = ?");
+            $stmtStock->execute([$variantId]);
+            $stock = (int)($stmtStock->fetchColumn() ?? 0);
+        }
+    } else {
+        $stock = (int)($product['stock'] ?? 0);
+    }
+
+    if ($stock < $quantity) {
+        jsonResponse(false, [], 'Not enough stock available. Max: ' . $stock);
+    }
 
     // Create a unique key for the cart item based on product and variant/size/color
     $cartKey = $productId . '_' . $variantId . '_' . $size . '_' . $color;
