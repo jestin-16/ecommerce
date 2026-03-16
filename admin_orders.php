@@ -85,7 +85,7 @@ $orders = $stmt->fetchAll();
                                 <div class="text-secondary fs-8"><?php echo htmlspecialchars($o['user_email']); ?></div>
                             </td>
                             <td class="text-secondary fs-7"><?php echo $date; ?></td>
-                            <td class="font-mono text-dark fs-7 fw-bold">$<?php echo number_format($o['total_amount'], 2); ?></td>
+                            <td class="font-mono text-dark fs-7 fw-bold">₹<?php echo number_format($o['total_amount'], 2); ?></td>
                             <td>
                                 <select class="form-select form-select-sm bg-light text-dark border-light rounded-0 shadow-none status-select" data-id="<?php echo $o['id']; ?>" style="width: auto; font-size: 0.8rem;">
                                     <option value="Pending" <?php echo $o['status'] == 'Pending' ? 'selected' : ''; ?>>Pending</option>

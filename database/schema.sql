@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS products (
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
     image_url VARCHAR(255),
-    category VARCHAR(100) NOT NULL,
+    category ENUM('Coats & Jackets', 'Knitwear', 'Footwear', 'Accessories', 'Sale') NOT NULL,
     stock INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

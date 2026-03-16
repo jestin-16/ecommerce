@@ -82,7 +82,7 @@ function renderCart(data) {
 
     badge.text(totalItems);
     titleCount.text(totalItems);
-    totalEl.text('$' + parseFloat(subtotal).toFixed(2));
+    totalEl.text('₹' + parseFloat(subtotal).toFixed(2));
 
     container.empty();
 
@@ -113,7 +113,7 @@ function renderCart(data) {
                 </div>
                 <div class="cart-item-price-remove">
                     <button class="remove-item-btn" data-key="${item.cart_key}"><i class="bi bi-x"></i></button>
-                    <div class="cart-item-total mt-4 text-dark font-mono">$${parseFloat(item.line_total).toFixed(2)}</div>
+                    <div class="cart-item-total mt-4 text-dark font-mono">₹${parseFloat(item.line_total).toFixed(2)}</div>
                 </div>
             </div>
         `;

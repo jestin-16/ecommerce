@@ -46,9 +46,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
 
             <div class="collapse navbar-collapse justify-content-center" id="borealNav">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item"><a class="nav-link text-uppercase fs-7 tracking-wider filter-link" href="#"
-                            data-category="New Arrivals">New
-                            Arrivals</a></li>
+
                     <li class="nav-item"><a class="nav-link text-uppercase fs-7 tracking-wider filter-link" href="#"
                             data-category="Coats & Jackets">Coats & Jackets</a></li>
                     <li class="nav-item"><a class="nav-link text-uppercase fs-7 tracking-wider filter-link" href="#"
@@ -163,7 +161,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                                             class="btn btn-link text-dark text-decoration-none p-0 px-2 fw-bold hero-qty-plus">+</button>
                                     </div>
                                     <p class="font-mono fs-4 text-dark mb-0">
-                                        $<?php echo number_format($featuredProduct['price'], 2); ?></p>
+                                        ₹<?php echo number_format($featuredProduct['price'], 2); ?></p>
                                 </div>
                                 <button
                                     class="btn btn-dark rounded-0 w-100 py-2 text-uppercase fs-7 fw-bold add-to-cart-btn"
@@ -263,7 +261,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                                     </h5>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <p class="card-text text-dark font-mono fs-5 mb-0">
-                                            $<?php echo number_format($product['price'], 2); ?></p>
+                                            ₹<?php echo number_format($product['price'], 2); ?></p>
                                         <div class="color-swatches d-flex gap-1">
                                             <span class="swatch bg-dark border border-secondary rounded-circle d-block"
                                                 style="width:12px; height:12px;"></span>
@@ -322,7 +320,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
             <div class="row g-5 mb-5 pb-4 border-bottom">
                 <div class="col-lg-4 pe-lg-5">
                     <a class="text-decoration-none text-uppercase fw-bold fs-3 tracking-wide text-dark mb-4 d-block"
-                        href="#">
+                        href="index.php">
                         BOREAL
                     </a>
                     <p class="text-secondary text-start pe-lg-4 fs-7 mb-4">
@@ -346,16 +344,20 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                     <h6 class="text-dark text-uppercase tracking-wider fs-7 mb-4">Shop</h6>
                     <ul class="list-unstyled d-flex flex-column gap-3">
                         <li><a href="#"
-                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">New
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest filter-link"
+                                data-category="All">New
                                 Arrivals</a></li>
                         <li><a href="#"
-                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Coats</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest filter-link"
+                                data-category="Coats & Jackets">Coats</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Knitwear</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest filter-link"
+                                data-category="Knitwear">Knitwear</a>
                         </li>
                         <li><a href="#"
-                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest">Sale</a>
+                                class="text-secondary text-decoration-none hover-dark fs-7 text-uppercase tracking-widest filter-link"
+                                data-category="Sale">Sale</a>
                         </li>
                     </ul>
                 </div>
@@ -401,9 +403,9 @@ $featuredProduct = !empty($products) ? $products[0] : null;
                 <p class="text-secondary fs-8 mb-3 mb-md-0 text-uppercase tracking-widest">© 2026 BOREAL. All
                     Rights Reserved.</p>
                 <div class="d-flex gap-4">
-                    <a href="#" class="text-dark hover-accent"><i class="bi bi-instagram fs-5"></i></a>
-                    <a href="#" class="text-dark hover-accent"><i class="bi bi-twitter-x fs-5"></i></a>
-                    <a href="#" class="text-dark hover-accent"><i class="bi bi-tiktok fs-5"></i></a>
+                    <a href="https://instagram.com/boreal" target="_blank" class="text-dark hover-accent"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="https://twitter.com/boreal" target="_blank" class="text-dark hover-accent"><i class="bi bi-twitter-x fs-5"></i></a>
+                    <a href="https://tiktok.com/@boreal" target="_blank" class="text-dark hover-accent"><i class="bi bi-tiktok fs-5"></i></a>
                 </div>
             </div>
         </div>
@@ -429,7 +431,7 @@ $featuredProduct = !empty($products) ? $products[0] : null;
             <div class="cart-footer mt-auto p-4 bg-light border-top">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <span class="fs-6 text-uppercase tracking-wider text-secondary">Subtotal</span>
-                    <span class="fs-4 font-mono text-dark fw-bold" id="cart-total">$0.00</span>
+                    <span class="fs-4 font-mono text-dark fw-bold" id="cart-total">₹0.00</span>
                 </div>
                 <div class="d-grid gap-3">
                     <a href="checkout.php"

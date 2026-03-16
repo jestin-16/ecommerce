@@ -90,7 +90,7 @@ $products = $stmt->fetchAll();
                                     <?php echo htmlspecialchars($p['description'] ?: 'No description'); ?>
                                 </div>
                             </td>
-                            <td class="font-mono text-dark fs-7 fw-bold">$<?php echo number_format($p['price'], 2); ?></td>
+                            <td class="font-mono text-dark fs-7 fw-bold">₹<?php echo number_format($p['price'], 2); ?></td>
                             <td>
                                 <div class="font-mono text-dark fs-7">
                                     <?php 

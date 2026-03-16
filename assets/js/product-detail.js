@@ -73,7 +73,7 @@ $(document).ready(function() {
 
         $('#modalProductName').text(currentProduct.name);
         $('#modalDescription').text(currentProduct.description || 'No description available for this luxury piece.');
-        $('#modalProductPrice').text('$' + parseFloat(currentProduct.price).toFixed(2));
+        $('#modalProductPrice').text('₹' + parseFloat(currentProduct.price).toFixed(2));
         $('#modalProductImage').attr('src', currentProduct.image_url);
 
         // Category Badge

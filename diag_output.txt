@@ -1,0 +1,262 @@
+=== SCHEMAS ===
+Q: SHOW CREATE TABLE product_variants
+Array
+(
+    [0] => Array
+        (
+            [Table] => product_variants
+            [Create Table] => CREATE TABLE `product_variants` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `color_name` varchar(50) DEFAULT NULL,
+  `color_hex` varchar(10) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `product_variants_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+        )
+
+)
+
+Q: SHOW CREATE TABLE variant_stocks
+Array
+(
+    [0] => Array
+        (
+            [Table] => variant_stocks
+            [Create Table] => CREATE TABLE `variant_stocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `variant_id` int(11) NOT NULL,
+  `size` varchar(10) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `variant_id` (`variant_id`),
+  CONSTRAINT `variant_stocks_ibfk_1` FOREIGN KEY (`variant_id`) REFERENCES `product_variants` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+        )
+
+)
+
+=== DATA SAMPLE ===
+Q: SELECT * FROM product_variants ORDER BY id DESC LIMIT 10
+Array
+(
+    [0] => Array
+        (
+            [id] => 22
+            [product_id] => 32
+            [color_name] => Black
+            [color_hex] => #000000
+            [image_url] => https://i.pinimg.com/control1/1200x/77/33/79/773379858d28da59d36813fca43cc980.jpg
+            [stock] => 0
+        )
+
+    [1] => Array
+        (
+            [id] => 21
+            [product_id] => 31
+            [color_name] => white
+            [color_hex] => #ffffff
+            [image_url] => https://i.pinimg.com/control1/1200x/37/d9/eb/37d9eb9087d132f7fa96b4f9efb2f2f2.jpg
+            [stock] => 0
+        )
+
+    [2] => Array
+        (
+            [id] => 20
+            [product_id] => 31
+            [color_name] => white
+            [color_hex] => #ffffff
+            [image_url] => https://i.pinimg.com/control1/1200x/37/d9/eb/37d9eb9087d132f7fa96b4f9efb2f2f2.jpg
+            [stock] => 0
+        )
+
+    [3] => Array
+        (
+            [id] => 18
+            [product_id] => 32
+            [color_name] => Blue
+            [color_hex] => #0000FF
+            [image_url] => https://i.pinimg.com/1200x/dd/67/30/dd6730be42684378f2abd82900072e72.jpg
+            [stock] => 0
+        )
+
+    [4] => Array
+        (
+            [id] => 16
+            [product_id] => 30
+            [color_name] => Green
+            [color_hex] =>  #008000
+            [image_url] => https://i.pinimg.com/1200x/08/cb/6d/08cb6dcb98349d98c553ab2334e9b366.jpg
+            [stock] => 0
+        )
+
+)
+
+Q: SELECT * FROM variant_stocks ORDER BY variant_id DESC LIMIT 20
+Array
+(
+    [0] => Array
+        (
+            [id] => 141
+            [variant_id] => 22
+            [size] => M
+            [stock] => 0
+        )
+
+    [1] => Array
+        (
+            [id] => 140
+            [variant_id] => 22
+            [size] => S
+            [stock] => 2
+        )
+
+    [2] => Array
+        (
+            [id] => 139
+            [variant_id] => 22
+            [size] => XS
+            [stock] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 144
+            [variant_id] => 22
+            [size] => XXL
+            [stock] => 3
+        )
+
+    [4] => Array
+        (
+            [id] => 143
+            [variant_id] => 22
+            [size] => XL
+            [stock] => 5
+        )
+
+    [5] => Array
+        (
+            [id] => 142
+            [variant_id] => 22
+            [size] => L
+            [stock] => 2
+        )
+
+    [6] => Array
+        (
+            [id] => 120
+            [variant_id] => 21
+            [size] => XXL
+            [stock] => 5
+        )
+
+    [7] => Array
+        (
+            [id] => 119
+            [variant_id] => 21
+            [size] => XL
+            [stock] => 5
+        )
+
+    [8] => Array
+        (
+            [id] => 118
+            [variant_id] => 21
+            [size] => L
+            [stock] => 5
+        )
+
+    [9] => Array
+        (
+            [id] => 117
+            [variant_id] => 21
+            [size] => M
+            [stock] => 5
+        )
+
+    [10] => Array
+        (
+            [id] => 116
+            [variant_id] => 21
+            [size] => S
+            [stock] => 5
+        )
+
+    [11] => Array
+        (
+            [id] => 115
+            [variant_id] => 21
+            [size] => XS
+            [stock] => 5
+        )
+
+    [12] => Array
+        (
+            [id] => 110
+            [variant_id] => 20
+            [size] => S
+            [stock] => 5
+        )
+
+    [13] => Array
+        (
+            [id] => 111
+            [variant_id] => 20
+            [size] => M
+            [stock] => 5
+        )
+
+    [14] => Array
+        (
+            [id] => 112
+            [variant_id] => 20
+            [size] => L
+            [stock] => 5
+        )
+
+    [15] => Array
+        (
+            [id] => 113
+            [variant_id] => 20
+            [size] => XL
+            [stock] => 5
+        )
+
+    [16] => Array
+        (
+            [id] => 114
+            [variant_id] => 20
+            [size] => XXL
+            [stock] => 5
+        )
+
+    [17] => Array
+        (
+            [id] => 109
+            [variant_id] => 20
+            [size] => XS
+            [stock] => 5
+        )
+
+    [18] => Array
+        (
+            [id] => 135
+            [variant_id] => 18
+            [size] => M
+            [stock] => 0
+        )
+
+    [19] => Array
+        (
+            [id] => 134
+            [variant_id] => 18
+            [size] => S
+            [stock] => 5
+        )
+
+)
+

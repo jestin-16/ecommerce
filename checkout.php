@@ -86,7 +86,7 @@ if (empty($cart) || $subtotal <= 0) {
                                 </div>
                             </div>
 
-                            <button type="submit" id="place-order-btn" class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fs-7 fw-bold tracking-wider mt-4">Place Order ($<?php echo number_format($subtotal, 2); ?>)</button>
+                            <button type="submit" id="place-order-btn" class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fs-7 fw-bold tracking-wider mt-4">Place Order (₹<?php echo number_format($subtotal, 2); ?>)</button>
                         </form>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ if (empty($cart) || $subtotal <= 0) {
                                     <small class="text-secondary tracking-wider fs-8">QTY: <?php echo $item['qty']; ?> <?php echo isset($item['size']) && $item['size'] ? " | SIZE: ".$item['size'] : ""; ?> <?php echo isset($item['color']) && $item['color'] ? " | COLOR: ".$item['color'] : ""; ?></small>
                                 </div>
                                 <div class="ms-auto text-dark font-mono">
-                                    $<?php echo number_format($item['price'] * $item['qty'], 2); ?>
+                                    ₹<?php echo number_format($item['price'] * $item['qty'], 2); ?>
                                 </div>
                             </div>
                             <?php endforeach; ?>
@@ -112,7 +112,7 @@ if (empty($cart) || $subtotal <= 0) {
                         <div class="mt-4 pt-3 border-top">
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-secondary text-uppercase tracking-wider fs-8">Subtotal</span>
-                                <span class="text-dark font-mono">$<?php echo number_format($subtotal, 2); ?></span>
+                                <span class="text-dark font-mono">₹<?php echo number_format($subtotal, 2); ?></span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-secondary text-uppercase tracking-wider fs-8">Shipping (Standard)</span>
@@ -120,7 +120,7 @@ if (empty($cart) || $subtotal <= 0) {
                             </div>
                             <div class="d-flex justify-content-between mt-3 pt-3 border-top">
                                 <span class="text-white text-uppercase fw-bold tracking-wider fs-6">Total</span>
-                                <span class="text-accent font-mono fw-bold fs-5">$<?php echo number_format($subtotal, 2); ?></span>
+                                <span class="text-accent font-mono fw-bold fs-5">₹<?php echo number_format($subtotal, 2); ?></span>
                             </div>
                         </div>
                     </div>

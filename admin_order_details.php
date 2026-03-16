@@ -102,16 +102,16 @@ $date = date('F j, Y, g:i a', strtotime($order['created_at']));
                                     <span class="text-dark font-playfair fs-6 fw-bold"><?php echo htmlspecialchars($item['name']); ?></span>
                                 </div>
                             </td>
-                            <td class="text-end px-3 font-mono text-secondary fs-7">$<?php echo number_format($item['price_at_purchase'], 2); ?></td>
+                            <td class="text-end px-3 font-mono text-secondary fs-7">₹<?php echo number_format($item['price_at_purchase'], 2); ?></td>
                             <td class="text-center px-3 text-dark fs-7"><?php echo $item['quantity']; ?></td>
-                            <td class="text-end px-3 font-mono text-dark fs-6 fw-bold">$<?php echo number_format($item['price_at_purchase'] * $item['quantity'], 2); ?></td>
+                            <td class="text-end px-3 font-mono text-dark fs-6 fw-bold">₹<?php echo number_format($item['price_at_purchase'] * $item['quantity'], 2); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3" class="text-end py-4 px-3 text-secondary text-uppercase tracking-wider fs-7">Order Total</td>
-                            <td class="text-end py-4 px-3 font-mono text-dark fs-4 fw-bold">$<?php echo number_format($order['total_amount'], 2); ?></td>
+                            <td class="text-end py-4 px-3 font-mono text-dark fs-4 fw-bold">₹<?php echo number_format($order['total_amount'], 2); ?></td>
                         </tr>
                     </tfoot>
                 </table>

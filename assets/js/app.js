@@ -220,7 +220,7 @@ function renderProducts(products) {
                         </div>
                         <h5 class="card-title text-dark font-playfair fs-5 mb-2">${product.name}</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
-                            <p class="card-text text-dark font-mono fs-5 mb-0">$${parseFloat(product.price).toFixed(2)}</p>
+                            <p class="card-text text-dark font-mono fs-5 mb-0">₹${parseFloat(product.price).toFixed(2)}</p>
                             <div class="color-swatches d-flex gap-1">
                                 <span class="swatch bg-dark border border-secondary rounded-circle d-block" style="width:12px; height:12px;"></span>
                                 <span class="swatch bg-secondary rounded-circle d-block" style="width:12px; height:12px;"></span>

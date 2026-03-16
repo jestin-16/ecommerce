@@ -23,11 +23,12 @@ try {
     $stmt->execute([$productId]);
     $variants = $stmt->fetchAll();
 
-    foreach ($variants as &$v) {
+    foreach ($variants as &$variantRow) {
         $stmt = $pdo->prepare("SELECT size, stock FROM variant_stocks WHERE variant_id = ?");
-        $stmt->execute([$v['id']]);
-        $v['sizes'] = $stmt->fetchAll(PDO::FETCH_KEY_PAIR); // Returns ['XS' => 10, 'S' => 5, ...]
+        $stmt->execute([$variantRow['id']]);
+        $variantRow['sizes'] = $stmt->fetchAll(PDO::FETCH_KEY_PAIR); // Returns ['XS' => 10, 'S' => 5, ...]
     }
+    unset($variantRow);
 
     jsonResponse(true, [
         'product' => $product,
