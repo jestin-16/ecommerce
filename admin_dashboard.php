@@ -16,7 +16,7 @@ $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
 if (!$user) {
-    session_destroy();
+    session_destroy();@
     header("Location: login.php");
     exit;
 }
